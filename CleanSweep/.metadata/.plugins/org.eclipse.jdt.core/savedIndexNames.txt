@@ -1,5 +1,0 @@
-INDEX VERSION 1.131+C:\Users\LENOVO\CleanSweep\.metadata\.plugins\org.eclipse.jdt.core
-1873333479.index
-761146062.index
-3240673035.index
-1352225095.index
