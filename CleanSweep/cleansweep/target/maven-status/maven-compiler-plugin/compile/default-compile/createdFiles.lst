@@ -1,9 +1,0 @@
-com\group9\cleansweep\App.class
-com\group9\cleansweep\Model\FloorPlan$Type.class
-com\group9\cleansweep\Model\CleanSweep.class
-com\group9\cleansweep\Model\DirtDetection.class
-com\group9\cleansweep\Model\FloorPlan.class
-com\group9\cleansweep\Model\ObstacleDetection.class
-com\group9\cleansweep\Model\PowerManagement.class
-com\group9\cleansweep\Model\Navigation.class
-com\group9\cleansweep\Model\ObstacleDetection$Type.class
