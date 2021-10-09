@@ -27,7 +27,7 @@ public class NavigationSensor {
             //proceed backwards
             return;
         else if (sensorNum == 4)
-            //lol
+            //Not sure what we would do here honestly, lol
             return;
         else if (sensorNum >= 5)
             //Stop cleaning
