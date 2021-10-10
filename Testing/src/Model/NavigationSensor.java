@@ -13,78 +13,80 @@ public class NavigationSensor {
     private UnderSensor underSensor;
 
     public void CheckSensors() {
-        int sensorNum = CheckFrontSensor();
-        if (sensorNum == 0)
+        //Make sensorNum into a String
+        String sensor = CheckFrontSensor();
+        if (sensor == "Front")
             //proceed forward
             return;
-        else if (sensorNum == 1)
+        else if (sensor == "Left")
             //proceed left
             return;
-        else if (sensorNum == 2)
+        else if (sensor == "Right")
             //proceed right
             return;
-        else if (sensorNum == 3)
+        else if (sensor == "Back")
             //proceed backwards
             return;
-        else if (sensorNum == 4)
+        else if (sensor == "Under")
             //Not sure what we would do here honestly, lol
             return;
-        else if (sensorNum >= 5)
+        else if (sensor == "UNKNOWN")
             //Stop cleaning
             return;
 
     }
 
-    public int CheckFrontSensor() {
-        int sensorNum = 0;
+    public String CheckFrontSensor() {
+        String sensor = "Front";
 
         frontSensor.run();
         if(frontSensor.equals(OPEN))
-            return sensorNum;
+            return sensor;
         else {
-            sensorNum+=1;
-            return CheckLeftSensor(sensorNum);
+            sensor = "Left";
+            return CheckLeftSensor(sensor);
         }
     }
-    public int CheckLeftSensor(int sensorNum){
+    public String CheckLeftSensor(String sensor){
         leftSensor.run();
         if(leftSensor.equals(OPEN))
-            return sensorNum;
+            return sensor;
         else {
-            sensorNum+=1;
-            return CheckRightSensor(sensorNum);
+            sensor = "Right";
+            return CheckRightSensor(sensor);
         }
     }
-    public int CheckRightSensor(int sensorNum) {
+    public String CheckRightSensor(String sensor) {
         rightSensor.run();
         if(rightSensor.equals(OPEN))
-            return sensorNum;
+            return sensor;
         else {
-            sensorNum+=1;
-            return CheckBackSensor(sensorNum);
+            sensor = "Back";
+            return CheckBackSensor(sensor);
         }
     }
-    public int CheckBackSensor(int sensorNum) {
+    public String CheckBackSensor(String sensor) {
         backSensor.run();
         if(rightSensor.equals(OPEN))
-            return sensorNum;
+            return sensor;
         else {
-            sensorNum+=1;
-            return CheckUnderSensor(sensorNum);
+            sensor = "Under";
+            return CheckUnderSensor(sensor);
         }
     }
-    public int CheckUnderSensor(int sensorNum) {
+    public String CheckUnderSensor(String sensor) {
         underSensor.run();
         if(underSensor.equals(OPEN))
-            return sensorNum;
+            return sensor;
         else if(underSensor.equals(STAIRS)) {
             //STOP CLEANING***
             System.out.println("stairs detected. Stopping...");
-            return 5;
+            return sensor;
         }
         else {
+            sensor = "UNKNOWN";
             System.out.println("Unknown obstacle detected.  Stopping...");
-            return 6;
+            return sensor;
         }
     }
 
