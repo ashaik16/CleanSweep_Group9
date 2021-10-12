@@ -14,4 +14,4 @@
 # Maven
 log/
 **/.metadata/*
-**/target
+**/target/*
