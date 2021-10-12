@@ -1,8 +1,10 @@
 package com.group9.cleansweep.Model;
 
-public class FloorPlan {
+import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
 
-	private enum Type {
-		BARE_FOOT, LOW_PILE_CARPET, HIGH_PILE_CARPET
-	}
+import lombok.Getter;
+
+public class FloorPlan {
+@Getter
+FloorPlanTypeEnum floorPlanType;
 }
