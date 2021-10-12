@@ -1,5 +1,7 @@
 package com.group9.cleansweep.Model;
 
+import netscape.javascript.JSObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +38,12 @@ public class FloorPlan {
 	public void removeRoom(String roomID){
 		roomLayout.remove(roomID);
 	}
+
+	public void loadFloorPlan(JSObject floorPlan){
+		// add logic based on the JSON file that is sent
+	}
+
+
 
 
 }
