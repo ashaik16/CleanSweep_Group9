@@ -7,13 +7,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
+
+import lombok.Getter;
+
 public class FloorPlan {
 	//this keeps track of all the tiles in a room
 	private final Map<String, ArrayList<String>> roomLayout;
 
-	private enum Type {
-		BARE_FOOT, LOW_PILE_CARPET, HIGH_PILE_CARPET
-	}
+	@Getter
+	FloorPlanTypeEnum floorPlanType;
+
 	public FloorPlan(){
 		this.roomLayout = new HashMap<>();
 	}
@@ -42,8 +46,4 @@ public class FloorPlan {
 	public void loadFloorPlan(JSObject floorPlan){
 		// add logic based on the JSON file that is sent
 	}
-
-
-
-
 }
