@@ -1,7 +1,7 @@
 # Eclipse
-/.classpath
-/*.project
-/.settings
+.classpath
+.project
+.settings/
  
 # Intellij
 **/.idea/*
@@ -15,3 +15,5 @@
 log/
 **/.metadata/*
 **/target/*
+
+
