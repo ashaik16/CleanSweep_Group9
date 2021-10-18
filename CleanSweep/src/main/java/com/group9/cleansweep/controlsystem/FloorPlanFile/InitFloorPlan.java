@@ -1,4 +1,4 @@
-package com.group9.cleansweep.Model.FloorPlanFile;
+package com.group9.cleansweep.controlsystem.FloorPlanFile;
 
 import com.google.gson.Gson;
 

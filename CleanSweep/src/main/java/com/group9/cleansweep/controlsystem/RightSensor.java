@@ -1,8 +1,6 @@
-package com.group9.cleansweep.Model;
+package com.group9.cleansweep.controlsystem;
 
-import com.group9.cleansweep.Model.ObstacleDetection;
-
-public class BackSensor {
+public class RightSensor {
 
     public ObstacleDetection.ObstacleType run() {
         ObstacleDetection obstacle = new ObstacleDetection();

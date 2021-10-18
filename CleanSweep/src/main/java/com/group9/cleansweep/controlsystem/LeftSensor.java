@@ -1,6 +1,6 @@
-package com.group9.cleansweep.Model;
+package com.group9.cleansweep.controlsystem;
 
-public class UnderSensor {
+public class LeftSensor {
 
     public ObstacleDetection.ObstacleType run() {
         ObstacleDetection obstacle = new ObstacleDetection();

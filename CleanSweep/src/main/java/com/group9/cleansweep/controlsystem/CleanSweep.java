@@ -1,9 +1,9 @@
-package com.group9.cleansweep.Model;
+package com.group9.cleansweep.controlsystem;
+
+import com.group9.cleansweep.controlsystem.FloorPlan;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import com.group9.cleansweep.Model.FloorPlan;
 
 public class CleanSweep {
 

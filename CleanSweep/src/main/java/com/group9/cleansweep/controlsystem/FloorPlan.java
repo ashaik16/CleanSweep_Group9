@@ -1,4 +1,4 @@
-package com.group9.cleansweep.Model;
+package com.group9.cleansweep.controlsystem;
 
 import netscape.javascript.JSObject;
 

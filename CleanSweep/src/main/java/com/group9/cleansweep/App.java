@@ -1,6 +1,6 @@
 package com.group9.cleansweep;
 
-import com.group9.cleansweep.Service.PowerManagementService;
+import com.group9.cleansweep.controlsystem.PowerManagement;
 
 /**
  * Hello world!
@@ -13,7 +13,7 @@ public class App
         System.out.println( "Hello Miami!" );
         System.out.println("Lou was here.");
         
-        PowerManagementService powerManagementService= new PowerManagementService();
+        PowerManagement powerManagementService= new PowerManagement();
         String currentfloorPlanType="LOW_PILE_CARPET";
         String previousfloorPlanType="BARE_FOOT";
         powerManagementService.getUnitOfCharge(currentfloorPlanType);

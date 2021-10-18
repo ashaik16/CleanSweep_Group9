@@ -1,6 +1,6 @@
-package com.group9.cleansweep.Service;
+package com.group9.cleansweep.controlsystem;
 
-public class StatusCheckService {
+public class StatusCheck {
 
 	public void getStatus(String statusCheckMessage) {
 	System.out.println(statusCheckMessage);
