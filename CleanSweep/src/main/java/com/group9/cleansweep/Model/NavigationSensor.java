@@ -1,8 +1,9 @@
-package Model;
+package java.com.group9.cleansweep.Model;
 
-
-import static Model.ObstacleDetection.ObstacleType.OPEN;
-import static Model.ObstacleDetection.ObstacleType.STAIRS;
+import static java.com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.OPEN;
+import static java.com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.STAIRS;
+import static java.com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.OBSTACLE;
+import static java.com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.UNKNOWN;
 
 public class NavigationSensor {
 
@@ -38,6 +39,7 @@ public class NavigationSensor {
 
     public String CheckFrontSensor() {
         String sensor = "Front";
+        frontSensor.getClass();
 
         frontSensor.run();
         if(frontSensor.equals(OPEN))

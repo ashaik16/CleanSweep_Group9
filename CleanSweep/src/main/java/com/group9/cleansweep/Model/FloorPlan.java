@@ -1,4 +1,4 @@
-package com.group9.cleansweep.Model;
+package java.com.group9.cleansweep.Model;
 
 import netscape.javascript.JSObject;
 
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
+import java.com.group9.cleansweep.Enum.FloorPlanTypeEnum;
 
 import lombok.Getter;
 

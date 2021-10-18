@@ -1,4 +1,4 @@
-package com.group9.cleansweep.Enum;
+package java.com.group9.cleansweep.Enum;
 
 public enum UnitConsumedEnum {
 	BARE_FOOT(1), LOW_PILE_CARPET(2), HIGH_PILE_CARPET(3);

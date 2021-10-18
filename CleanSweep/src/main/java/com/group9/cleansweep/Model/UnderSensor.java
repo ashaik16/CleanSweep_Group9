@@ -1,4 +1,4 @@
-package Model;
+package java.com.group9.cleansweep.Model;
 
 public class UnderSensor {
 
