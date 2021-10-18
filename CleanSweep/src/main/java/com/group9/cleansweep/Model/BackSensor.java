@@ -1,6 +1,6 @@
-package java.com.group9.cleansweep.Model;
+package com.group9.cleansweep.Model;
 
-import java.com.group9.cleansweep.Model.ObstacleDetection;
+import com.group9.cleansweep.Model.ObstacleDetection;
 
 public class BackSensor {
 

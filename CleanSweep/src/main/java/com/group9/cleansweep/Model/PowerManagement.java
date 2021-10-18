@@ -1,7 +1,7 @@
-package java.com.group9.cleansweep.Model;
+package com.group9.cleansweep.Model;
 
-import java.com.group9.cleansweep.Enum.FloorPlanTypeEnum;
-import java.com.group9.cleansweep.Enum.UnitConsumedEnum;
+import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
+import com.group9.cleansweep.Enum.UnitConsumedEnum;
 
 import lombok.Getter;
 import lombok.Setter;

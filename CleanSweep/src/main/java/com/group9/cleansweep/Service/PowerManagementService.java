@@ -1,6 +1,6 @@
-package java.com.group9.cleansweep.Service;
+package com.group9.cleansweep.Service;
 
-import java.com.group9.cleansweep.Model.PowerManagement;
+import com.group9.cleansweep.Model.PowerManagement;
 
 public class PowerManagementService {
 	private  final double minimumCapacityForPowerUnit=50.0;

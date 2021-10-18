@@ -1,9 +1,9 @@
-package java.com.group9.cleansweep.Model;
+package com.group9.cleansweep.Model;
 
-import static java.com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.OPEN;
-import static java.com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.STAIRS;
-import static java.com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.OBSTACLE;
-import static java.com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.UNKNOWN;
+import static com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.OPEN;
+import static com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.STAIRS;
+import static com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.OBSTACLE;
+import static com.group9.cleansweep.Model.ObstacleDetection.ObstacleType.UNKNOWN;
 
 public class NavigationSensor {
 

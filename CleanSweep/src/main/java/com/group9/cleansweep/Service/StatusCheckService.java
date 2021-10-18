@@ -1,4 +1,4 @@
-package java.com.group9.cleansweep.Service;
+package com.group9.cleansweep.Service;
 
 public class StatusCheckService {
 
