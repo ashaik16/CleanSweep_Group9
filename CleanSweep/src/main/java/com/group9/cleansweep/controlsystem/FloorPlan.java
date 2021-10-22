@@ -45,7 +45,7 @@ public class FloorPlan {
 //		return roomID;
 //	}
 
-	public void buildGenericFloorPlan(){
+	private void buildGenericFloorPlan(){
 		Random random = new Random();
 		String[] alpha = {"a", "b", "c", "d", "e", "f", "g"};
 		//these loops create the tiles and add them to the map
@@ -113,10 +113,10 @@ public class FloorPlan {
 		Tile chargingStation = roomLayout.get("g3");
 		chargingStation.setChargingStation(true);
 	}
-
-	public void removeRoom(String roomID){
-		roomLayout.remove(roomID);
-	}
+//
+//	public void removeRoom(String roomID){
+//		roomLayout.remove(roomID);
+//	}
 
 //	public void loadFloorPlan(JSObject floorPlan){
 //		// add logic based on the JSON file that is sent
