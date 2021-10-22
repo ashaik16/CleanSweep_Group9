@@ -1,7 +1,5 @@
 package com.group9.cleansweep.controlsystem;
 
-import com.group9.cleansweep.controlsystem.FloorPlan;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,9 +39,13 @@ public class CleanSweep {
 
 	public void doWork(){
 		FloorPlan floorPlan = new FloorPlan();
-
-		System.out.println("We are doing work in the Clean sweep");
+	
+		//System.out.println("We are doing work in the Clean sweep");
+		dirtDetectionProcess(floorPlan);
 	}
 	
-
+	public void dirtDetectionProcess(FloorPlan floorPlan) {
+		DirtDetection dirtDetecting= new DirtDetection();
+		dirtDetecting.dirtDetectionProcess(floorPlan);
+}
 }

@@ -1,6 +1,7 @@
 package com.group9.cleansweep;
 
 import com.group9.cleansweep.controlsystem.CleanSweep;
+import com.group9.cleansweep.controlsystem.DirtDetection;
 import com.group9.cleansweep.controlsystem.PowerManagement;
 
 /**
@@ -21,5 +22,8 @@ public class App
         powerManagementService.getAverageUnitOfCharge(currentfloorPlanType,previousfloorPlanType);
     	
         powerManagementService.checkUnitOfPower(100.0);
+     
+        
+     
     }
 }

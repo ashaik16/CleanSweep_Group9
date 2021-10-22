@@ -21,7 +21,7 @@ public class FloorPlan {
 	public FloorPlan(){
 		this.roomLayout = new HashMap<>();
 		buildGenericFloorPlan();
-		System.out.println("something");
+		//System.out.println("something");
 	}
 
 	public Map<String, Tile> getFloorPlanMap(){
