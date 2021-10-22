@@ -6,16 +6,12 @@ import lombok.Setter;
 public class CleanSweep {
 
 	/*
-	floor plan to get all tiles or get start tile
-	Navigation object
-		move to next tile - return new tile
-	Dirt Detection object
-		is capacity full? >=4
-		if full -> emptyDirtTank
-		clean dirt stuff
-
-	Power Management object
-
+	 * floor plan to get all tiles or get start tile Navigation object move to next
+	 * tile - return new tile Dirt Detection object is capacity full? >=4 if full ->
+	 * emptyDirtTank clean dirt stuff
+	 * 
+	 * Power Management object
+	 * 
 	 */
 
 	@Getter
@@ -37,15 +33,15 @@ public class CleanSweep {
 	@Setter
 	PowerManagement powerManagement;
 
-	public void doWork(){
+	public void doWork() {
 		FloorPlan floorPlan = new FloorPlan();
-	
-		//System.out.println("We are doing work in the Clean sweep");
+
+		// System.out.println("We are doing work in the Clean sweep");
 		dirtDetectionProcess(floorPlan);
 	}
-	
+
 	public void dirtDetectionProcess(FloorPlan floorPlan) {
-		DirtDetection dirtDetecting= new DirtDetection();
+		DirtDetection dirtDetecting = new DirtDetection();
 		dirtDetecting.dirtDetectionProcess(floorPlan);
-}
+	}
 }

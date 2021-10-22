@@ -2,7 +2,7 @@ package com.group9.cleansweep.controlsystem;
 
 public class StatusCheck {
 
-	public void getStatus(String statusCheckMessage) {
+	public void setStatus(String statusCheckMessage) {
 	System.out.println(statusCheckMessage);
 		
 	}
