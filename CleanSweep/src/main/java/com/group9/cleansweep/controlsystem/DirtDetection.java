@@ -58,7 +58,7 @@ public class DirtDetection {
 		
 		for (Map.Entry<String, Tile> entry : floorPlanDirtMap.entrySet()) {
 
-			System.out.println("Key = " + entry.getKey() + ", Dirt Amount = " + entry.getValue().dirtAmount);
+			System.out.println("Key = " + entry.getKey() + ", Dirt Amount = " + entry.getValue().getDirtAmount());
 		}
 
 	}
@@ -79,16 +79,16 @@ public class DirtDetection {
 	}
 
 	public void cleanDirt(Tile tile) {
-		int dirtAmount = tile.dirtAmount;
-		dirtCount = tile.dirtAmount;
-		System.out.println("Total Dirt Amount of tile " + tile.id + ": " + tile.dirtAmount);
+		int dirtAmount = tile.getDirtAmount();
+		dirtCount = tile.getDirtAmount();
+		System.out.println("Total Dirt Amount of tile " + tile.getId() + ": " + tile.getDirtAmount());
 		
 		for (int i = dirtAmount; i >= 0; i--) {
-			if (tile.dirtAmount == 0) {
-				System.out.println("Tile " + tile.id + " is completely clean \n ");
+			if (tile.getDirtAmount() == 0) {
+				System.out.println("Tile " + tile.getId() + " is completely clean \n ");
 				break;
 			} else {
-				System.out.println("Cleaning tile: " + tile.id);
+				System.out.println("Cleaning tile: " + tile.getDirtAmount());
 				dirtCount--;
 				totalDirtCollected++;
 				isDirtCapacityFull = checkIfDirtCapacityFull(totalDirtCollected);
@@ -105,7 +105,7 @@ public class DirtDetection {
 				}
 				
 				tile.setDirtAmount(dirtCount);
-				System.out.println("Cuurent Dirt Amount of " + tile.id + " : " + dirtCount);
+				System.out.println("Cuurent Dirt Amount of " + tile.getId() + " : " + dirtCount);
 			}
 
 		}
