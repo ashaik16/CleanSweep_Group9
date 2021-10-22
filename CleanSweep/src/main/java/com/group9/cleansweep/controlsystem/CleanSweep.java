@@ -40,6 +40,8 @@ public class CleanSweep {
 	PowerManagement powerManagement;
 
 	public void doWork(){
+		FloorPlan floorPlan = new FloorPlan();
+
 		System.out.println("We are doing work in the Clean sweep");
 	}
 	
