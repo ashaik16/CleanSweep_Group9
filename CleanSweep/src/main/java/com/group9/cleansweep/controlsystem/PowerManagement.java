@@ -57,7 +57,7 @@ private int currentUnitOfCharge;
 		if(currentPowerUnit<minimumCapacityForPowerUnit)
 		{
 			StatusCheck statusCheck=new StatusCheck();
-			statusCheck.getStatus("Reached Minimum Capacity Of Power");
+			statusCheck.setStatus("Reached Minimum Capacity Of Power");
 			
 		}
 	}
