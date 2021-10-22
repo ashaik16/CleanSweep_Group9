@@ -88,7 +88,7 @@ public class DirtDetection {
 				System.out.println("Tile " + tile.getId() + " is completely clean \n ");
 				break;
 			} else {
-				System.out.println("Cleaning tile: " + tile.getDirtAmount());
+				System.out.println("Cleaning tile: " + tile.getId());
 				dirtCount--;
 				totalDirtCollected++;
 				isDirtCapacityFull = checkIfDirtCapacityFull(totalDirtCollected);
