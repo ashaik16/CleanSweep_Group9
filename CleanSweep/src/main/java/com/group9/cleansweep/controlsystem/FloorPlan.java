@@ -1,6 +1,6 @@
 package com.group9.cleansweep.controlsystem;
 
-import netscape.javascript.JSObject;
+//import netscape.javascript.JSObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +44,7 @@ public class FloorPlan {
 		roomLayout.remove(roomID);
 	}
 
-	public void loadFloorPlan(JSObject floorPlan){
-		// add logic based on the JSON file that is sent
-	}
+//	public void loadFloorPlan(JSObject floorPlan){
+//		// add logic based on the JSON file that is sent
+//	}
 }

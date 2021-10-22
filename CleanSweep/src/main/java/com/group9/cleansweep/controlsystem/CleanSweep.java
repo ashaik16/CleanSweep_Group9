@@ -38,6 +38,10 @@ public class CleanSweep {
 	@Getter
 	@Setter
 	PowerManagement powerManagement;
+
+	public void doWork(){
+		System.out.println("We are doing work in the Clean sweep");
+	}
 	
 
 }

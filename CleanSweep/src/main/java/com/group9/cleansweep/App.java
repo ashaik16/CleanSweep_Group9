@@ -1,5 +1,6 @@
 package com.group9.cleansweep;
 
+import com.group9.cleansweep.controlsystem.CleanSweep;
 import com.group9.cleansweep.controlsystem.PowerManagement;
 
 /**
@@ -10,8 +11,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello Miami!" );
-        System.out.println("Lou was here.");
+        CleanSweep cleanSweep = new CleanSweep();
+        cleanSweep.doWork();
         
         PowerManagement powerManagementService= new PowerManagement();
         String currentfloorPlanType="LOW_PILE_CARPET";
