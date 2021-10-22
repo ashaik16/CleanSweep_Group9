@@ -12,7 +12,7 @@ public class FloorPlan {
 	//this keeps track of all the tiles in a room String is the ID of the tile
 	private final Map<String, Tile> roomLayout;
 	private Map<String, Boolean> tileVisitedMap;
-	private final String[] floortypes = {"BARE_FOOT", "LOW_PILE_CARPET", "HIGH_PILE_CARPET"};
+	private final String[] floorTypes = {"BARE_FOOT", "LOW_PILE_CARPET", "HIGH_PILE_CARPET"};
 	private final Boolean[] isObstacle = {true, false};
 
 	@Getter
@@ -54,12 +54,12 @@ public class FloorPlan {
 			for(int j = 1; j <= 7; j++ ){
 				Tile tempTile = new Tile();
 				//setting tile to random floor type declared at top of class
-				tempTile.setSurfaceType(floortypes[random.nextInt(floortypes.length)]);
+				tempTile.setSurfaceType(floorTypes[random.nextInt(floorTypes.length)]);
 				//tile is randomly an obstacle or not
 				tempTile.setIsObstacle(isObstacle[random.nextInt(isObstacle.length)]);
 				String tempID = letter + j;
 				tempTile.setID(tempID);
-				roomLayout.put(tempTile.id, tempTile);
+				roomLayout.put(tempTile.getId(), tempTile);
 			}
 		}
 		//these loops go and attempt to get all the tiles in all directions catches the out of bounds and ignores it
