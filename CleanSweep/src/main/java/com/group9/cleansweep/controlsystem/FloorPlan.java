@@ -24,6 +24,10 @@ public class FloorPlan {
 		System.out.println("something");
 	}
 
+	public Map<String, Tile> getFloorPlanMap(){
+		return roomLayout;
+	}
+
 //	public ArrayList<String> getRoomTiles(String roomID){
 //		return roomLayout.get(roomID);
 //	}
