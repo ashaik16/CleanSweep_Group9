@@ -1,20 +1,20 @@
 package com.group9.cleansweep.controlsystem;
 
 public class Tile {
-	
-	public String surfaceType;
-	public int dirtAmount;
-	
-	boolean isChargingStation;
-	
-	boolean visited;
-	
-	public Tile rightNext;
-	public Tile leftNext;
-	public Tile topNext;
-	public Tile bottomNext;
-	public String id;
-	public Boolean isObstacle;
+
+	private String surfaceType;
+	private int dirtAmount;
+
+	private boolean isChargingStation;
+
+	private boolean visited;
+
+	private Tile rightNext;
+	private Tile leftNext;
+	private Tile topNext;
+	private Tile bottomNext;
+	private String id;
+	private Boolean isObstacle;
 	
 	Tile() {
 		this.id = null;
@@ -66,7 +66,45 @@ public class Tile {
 	}
 
 
+	public String getSurfaceType() {
+		return surfaceType;
+	}
 
+	public int getDirtAmount() {
+		return dirtAmount;
+	}
+
+	public boolean isChargingStation() {
+		return isChargingStation;
+	}
+
+	public boolean isVisited() {
+		return visited;
+	}
+
+	public Tile getRightNext() {
+		return rightNext;
+	}
+
+	public Tile getLeftNext() {
+		return leftNext;
+	}
+
+	public Tile getTopNext() {
+		return topNext;
+	}
+
+	public Tile getBottomNext() {
+		return bottomNext;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public Boolean getObstacle() {
+		return isObstacle;
+	}
 
 
 }
