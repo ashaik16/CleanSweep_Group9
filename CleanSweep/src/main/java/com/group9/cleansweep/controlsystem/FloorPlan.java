@@ -14,6 +14,7 @@ import lombok.Getter;
 public class FloorPlan {
 	//this keeps track of all the tiles in a room
 	private final Map<String, ArrayList<String>> roomLayout;
+	private Map<String, Boolean> tileVisitedMap;
 
 	@Getter
 	FloorPlanTypeEnum floorPlanType;

@@ -23,6 +23,7 @@ private int currentUnitOfCharge;
 	@Setter
 	private FloorPlan floorPlanType;
 
+	//print spent 3 power units
 
 
 	private  final double minimumCapacityForPowerUnit=50.0;

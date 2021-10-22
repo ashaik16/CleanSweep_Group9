@@ -7,6 +7,19 @@ import lombok.Setter;
 
 public class CleanSweep {
 
+	/*
+	floor plan to get all tiles or get start tile
+	Navigation object
+		move to next tile - return new tile
+	Dirt Detection object
+		is capacity full? >=4
+		if full -> emptyDirtTank
+		clean dirt stuff
+
+	Power Management object
+
+	 */
+
 	@Getter
 	private Long id;
 
