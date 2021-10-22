@@ -74,6 +74,7 @@ public class DirtDetection {
 		return floorPlanMap;
 	}
 
+	
 	public void cleanDirt(Tile tile) {
 		int dirtAmount=tile.dirtAmount;
 		int dirtCount=tile.dirtAmount;
