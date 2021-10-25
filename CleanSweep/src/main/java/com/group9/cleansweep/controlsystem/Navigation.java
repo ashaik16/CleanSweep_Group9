@@ -10,15 +10,30 @@ public class Navigation {
 	// this is where the stack/queue would be for tiles that have been visited
 	// need a method that returns boolean for is cleaning done
 	Stack<Tile> visited;
-	Tile currentPos;
+	Tile currentPos = new Tile();
 	FloorPlan floorPlan = new FloorPlan();
 
 	Map<String, Tile> floorPlanMap;
 
 	public Navigation() {
+		this.visited = new Stack<>();
 		this.floorPlanMap = floorPlan.getFloorPlanMap();
-		visited = new Stack<>();
+
+
+		// Assuming charging station is start
+		// set current position to the charging station
+
+		for(Map.Entry<String, Tile> entry : floorPlanMap.entrySet()){
+			if(entry.getValue().isChargingStation()) {
+				currentPos = entry.getValue();
+				currentPos.setRightNext(currentPos.getRightNext());
+				currentPos.setLeftNext(currentPos.getLeftNext());
+				currentPos.setTopNext(currentPos.getTopNext());
+				currentPos.setBottomNext((currentPos.getBottomNext()));
+			}
+		}
 	}
+
 
 	public Tile traverseRight(Tile target) {
 		currentPos.setRightNext(target);
@@ -97,7 +112,7 @@ public class Navigation {
 
 	}
 
-	// Assuming charging station is start
+
 
 //	@Getter
 //	@Setter
