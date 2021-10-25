@@ -65,6 +65,10 @@ public class Tile {
 		this.id = id;
 	}
 
+	public void setVisited(boolean visited) {
+		this.visited = visited;
+	}
+
 
 	public String getSurfaceType() {
 		return surfaceType;
