@@ -18,11 +18,11 @@ public class DirtDetectionTest {
 
 	@BeforeClass
 	public static void initDirtDetection() {
-		final String className = "DirtDetection";
+		final String className = "DirtDetectionTest";
 		dirtDetection = new DirtDetection();
 		floorPlan = new FloorPlan();
 		System.out.println("************************************************************");
-		System.out.println("             " + className + " test class getting executed");
+		System.out.println("     " + className + " class getting executed");
 		System.out.println("************************************************************");
 	}
 

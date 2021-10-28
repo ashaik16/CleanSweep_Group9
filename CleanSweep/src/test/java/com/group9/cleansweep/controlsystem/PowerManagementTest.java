@@ -19,7 +19,7 @@ public class PowerManagementTest {
 		powerManagement = new PowerManagement();
 
 		System.out.println("************************************************************");
-		System.out.println("             " + className + " test class getting executed");
+		System.out.println("     " + className + " class getting executed");
 		System.out.println("************************************************************");
 	}
 
