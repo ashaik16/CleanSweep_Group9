@@ -49,6 +49,7 @@ public class PowerManagementTest {
 	public void t2AverageUnitOfPower() {
 		testName = "t2AverageUnitOfPower";
 		printTestName(testName);
+
 		String currentfloorPlanType = "LOW_PILE_CARPET";
 		String previousfloorPlanType = "BARE_FOOT";
 		assertTrue(powerManagement.getAverageUnitOfCharge(currentfloorPlanType, previousfloorPlanType) == 1.5);
@@ -59,6 +60,7 @@ public class PowerManagementTest {
 	public void t3checkPowerLow() {
 		testName = "t3checkPowerLow";
 		printTestName(testName);
+
 		double cuurentUnitOfPower = 10.0;
 
 		powerManagement.checkUnitOfPower(cuurentUnitOfPower);

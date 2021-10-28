@@ -37,6 +37,7 @@ public class DirtDetectionTest {
 
 		testName = "t1checkRandomDirtAssignedIsNotNull";
 		printTestName(testName);
+
 		Map<String, Tile> floorPlanMap = floorPlan.getFloorPlanMap();
 		dirtDetection.setRandomDirt(floorPlan);
 		for (Map.Entry<String, Tile> entry : floorPlanMap.entrySet()) {
@@ -52,6 +53,7 @@ public class DirtDetectionTest {
 
 		testName = "t2checkDirtAssignedMaxValue";
 		printTestName(testName);
+
 		Map<String, Tile> floorPlanMap = floorPlan.getFloorPlanMap();
 		for (Map.Entry<String, Tile> entry : floorPlanMap.entrySet()) {
 
@@ -65,6 +67,7 @@ public class DirtDetectionTest {
 
 		testName = "t3checkIfAllTilesCleaned";
 		printTestName(testName);
+
 		dirtDetection.dirtDetectionProcess(floorPlan);
 		Map<String, Tile> floorPlanMap = floorPlan.getFloorPlanMap();
 		for (Map.Entry<String, Tile> entry : floorPlanMap.entrySet()) {
@@ -75,12 +78,13 @@ public class DirtDetectionTest {
 
 	@Test
 	public void t4checkIfDirtTankIsFull() {
-		
+
 		testName = "t4checkIfDirtTankIsFull";
 		printTestName(testName);
+
 		int currentDirtCollected = 100;
-		boolean isDirtCapacityFull=dirtDetection.checkIfDirtCapacityFull(currentDirtCollected);
-		if(isDirtCapacityFull)
+		boolean isDirtCapacityFull = dirtDetection.checkIfDirtCapacityFull(currentDirtCollected);
+		if (isDirtCapacityFull)
 			dirtDetection.emptyDirtTank();
 	}
 }
