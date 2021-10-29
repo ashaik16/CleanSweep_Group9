@@ -90,7 +90,7 @@ public class DirtDetection {
 					System.out.println("Please empty the dirt tank !!!");
 					System.out.println("-----------------------------------------");
 					emptyDirtTank();
-					break;
+			
 				}
 				
 				tile.setDirtAmount(dirtCount);

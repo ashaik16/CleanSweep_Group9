@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -61,7 +62,7 @@ public class DirtDetectionTest {
 
 		}
 	}
-
+	//@Ignore
 	@Test
 	public void t3checkIfAllTilesCleaned() {
 
