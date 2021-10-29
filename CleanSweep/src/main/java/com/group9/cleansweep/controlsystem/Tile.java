@@ -1,5 +1,8 @@
 package com.group9.cleansweep.controlsystem;
 
+import java.util.HashMap;
+import java.util.Random;
+
 public class Tile {
 
 	private String surfaceType;
@@ -15,7 +18,7 @@ public class Tile {
 	private Tile bottomNext;
 	private String id;
 	private Boolean isObstacle;
-	
+
 	Tile() {
 		this.id = null;
 		this.surfaceType = null;
@@ -64,6 +67,9 @@ public class Tile {
 	public void setID(String id){
 		this.id = id;
 	}
+	public void setVisited(Boolean visited) {
+		this.visited = visited;
+	}
 
 
 	public String getSurfaceType() {
@@ -105,6 +111,5 @@ public class Tile {
 	public Boolean getObstacle() {
 		return isObstacle;
 	}
-
 
 }

@@ -113,7 +113,22 @@ public class FloorPlan {
 		Tile chargingStation = roomLayout.get("g3");
 		chargingStation.setChargingStation(true);
 	}
-//
+
+	//Assumes entire floor is one room.  Pulls first tile from room
+	public Tile getTile(int num) {
+		Set<String> x = roomLayout.keySet();
+		Object[] y = new Object[100];
+		for (int i = 0; i < x.size(); i++) {
+			y[i] = x.toArray()[i].toString();
+		}
+		return roomLayout.get(y[num]);
+	}
+
+//Iterator iterator = collection.iterator();
+//while(iterator.hasNext()){
+//    Object object = iterator.next();
+//    System.out.println(object);
+//}
 //	public void removeRoom(String roomID){
 //		roomLayout.remove(roomID);
 //	}

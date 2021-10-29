@@ -13,7 +13,7 @@ public class PowerManagement {
 private final int totalBatteryUnit=250;
 	@Getter
 	@Setter
-private int currentUnitOfCharge;
+private float currentUnitOfCharge = 250;
 	
 	@Getter
 	@Setter
