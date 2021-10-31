@@ -35,8 +35,14 @@ public class CleanSweep {
 
 	public void doWork() {
 		FloorPlan floorPlan = new FloorPlan();
+		floorPlan.buildGenericFloorPlan();
+		dirtDetectionProcess(floorPlan);
+		floorPlan.writeFloorPlanToFile();
+	}
 
-		// System.out.println("We are doing work in the Clean sweep");
+	public void doWorkFromFile(String fileLocation){
+		FloorPlan floorPlan = new FloorPlan();
+		floorPlan.convertFileToFloorplan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
 		dirtDetectionProcess(floorPlan);
 	}
 

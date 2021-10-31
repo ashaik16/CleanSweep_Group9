@@ -1,12 +1,11 @@
 package com.group9.cleansweep.controlsystem;
 
-import java.util.Map;
-import java.util.Random;
-
 import com.group9.cleansweep.Enum.DirtAmountEnum;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Map;
+import java.util.Random;
 
 public class DirtDetection {
 
@@ -94,7 +93,7 @@ public class DirtDetection {
 				}
 				
 				tile.setDirtAmount(dirtCount);
-				System.out.println("Cuurent Dirt Amount of " + tile.getId() + " : " + dirtCount);
+				System.out.println("Current Dirt Amount of " + tile.getId() + " : " + dirtCount);
 			}
 
 		}
