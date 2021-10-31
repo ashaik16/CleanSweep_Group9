@@ -56,6 +56,11 @@ public class Navigation {
 		return currentTile;
 	}
 
+	private Tile findOpenTile(Tile tile){
+		
+		return tile;
+	}
+
 	private Boolean canMoveToNextTile(Tile currentTile, String direction){
 		Tile targetTile;
 		try{
