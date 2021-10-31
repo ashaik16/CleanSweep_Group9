@@ -61,29 +61,45 @@ public class Navigation {
 		try{
 			switch(direction.toUpperCase(Locale.ROOT)) {
 				case "UP":
+					System.out.println("Attempting to move up one tile");
 					targetTile = floorPlan.getTile(currentTile.getTopNext());
 					if(!visitedTiles.contains(targetTile) && !targetTile.getObstacle()){
 						return true;
+					} else if(targetTile.getObstacle()){
+						System.out.println("Obstacle detected!");
 					}
+					break;
 				case "DOWN":
+					System.out.println("Attempting to move up down tile");
 					targetTile = floorPlan.getTile(currentTile.getBottomNext());
 					if(!visitedTiles.contains(targetTile) && !targetTile.getObstacle()){
 						return true;
+					} else if(targetTile.getObstacle()){
+						System.out.println("Obstacle detected!");
 					}
+					break;
 				case "RIGHT":
+					System.out.println("Attempting to move up right tile");
 					targetTile = floorPlan.getTile(currentTile.getRightNext());
 					if(!visitedTiles.contains(targetTile) && !targetTile.getObstacle()){
 						return true;
+					} else if(targetTile.getObstacle()){
+						System.out.println("Obstacle detected!");
 					}
+					break;
 				case "LEFT":
+					System.out.println("Attempting to move up left tile");
 					targetTile = floorPlan.getTile(currentTile.getLeftNext());
 					if(!visitedTiles.contains(targetTile) && !targetTile.getObstacle()){
 						return true;
+					} else if(targetTile.getObstacle()){
+						System.out.println("Obstacle detected!");
 					}
+					break;
 			}
 		} catch (Exception e){
 			return false;
 		}
-		return false;
+		return true;
 	}
 }
