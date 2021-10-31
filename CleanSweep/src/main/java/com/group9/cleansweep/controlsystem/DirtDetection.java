@@ -11,7 +11,6 @@ import lombok.Setter;
 public class DirtDetection {
 
 	@Getter
-	// private final int maxDirtLevel =4;
 	private final int totalDirtCapacity = 50;
 	@Getter
 	@Setter
@@ -25,20 +24,11 @@ public class DirtDetection {
 	@Getter
 	@Setter
 	private boolean isDirtCapacityFull = false;
-
-	// private randomDirt() -> random between 0-maxDirtLevel
-	// dirt number reduces from capacity
-	// public detect dirt
-	// public clean dirt(int dirtNum)
-	// loop print statement
-	// call power management to subtract power for cleaning
-	// public boolean isDirtFull()
-	// print please change dirt tank
-	// public void emptyDirtTank()
-	// totalDirtCapcity = 50;
+	private static DirtDetection dirtDetecting = new DirtDetection();
+	
 
 	public void dirtDetectionProcess(FloorPlan floorPlan) {
-		DirtDetection dirtDetecting = new DirtDetection();
+	
 		Map<String, Tile> floorPlanDirtMap = dirtDetecting.setRandomDirt(floorPlan);
 		
 		for (Map.Entry<String, Tile> entry : floorPlanDirtMap.entrySet()) {
@@ -99,9 +89,8 @@ public class DirtDetection {
 					statusCheck.setStatus("\nClean Sweep Dirt Capacity Full !!!!\n");
 					System.out.println("Please empty the dirt tank !!!");
 					System.out.println("-----------------------------------------");
-
 					emptyDirtTank();
-					break;
+			
 				}
 				
 				tile.setDirtAmount(dirtCount);
@@ -112,7 +101,7 @@ public class DirtDetection {
 
 	}
 
-	private void emptyDirtTank() {
+	public void emptyDirtTank() {
 		totalDirtCollected = 0;
 
 		System.out.println("Dirt tank emptied!! Clean sweep is ready to vacuum again..");
