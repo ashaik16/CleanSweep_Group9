@@ -19,4 +19,12 @@ public class Navigation {
 	//print attempting to move left one cell
 	//print moved left one cell
 	//return left Tile object
+
+	public boolean isCleaningComplete(){
+		return isTrackingCycleComplete();
+	}
+
+	public Tile getFirstTile(FloorPlan floorPlan){
+		return floorPlan.getFirstTile();
+	}
 }
