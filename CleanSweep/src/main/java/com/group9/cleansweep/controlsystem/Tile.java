@@ -1,20 +1,21 @@
 package com.group9.cleansweep.controlsystem;
 
 public class Tile {
-
+	private String id;
 	private String surfaceType;
+	private Boolean isObstacle;
 	private int dirtAmount;
-
 	private boolean isChargingStation;
-
 	private boolean visited;
-
+	private String rightID;
+	private String leftID;
+	private String topID;
+	private String bottomID;
 	private Tile rightNext;
 	private Tile leftNext;
 	private Tile topNext;
 	private Tile bottomNext;
-	private String id;
-	private Boolean isObstacle;
+
 	
 	Tile() {
 		this.id = null;
@@ -27,6 +28,10 @@ public class Tile {
 		this.isChargingStation = false;
 		this.isObstacle = false;
 		this.visited = false;
+	}
+
+	public String[] getSurroundingTileID(){
+		return new String[]{rightID, leftID, topID, bottomID};
 	}
 
 	public void setSurfaceType(String surfaceType){

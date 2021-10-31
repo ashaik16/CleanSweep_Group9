@@ -2,11 +2,16 @@ package com.group9.cleansweep.controlsystem;
 
 //import netscape.javascript.JSObject;
 
-import java.util.*;
-
+import com.google.gson.Gson;
 import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
-
 import lombok.Getter;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class FloorPlan {
 	//this keeps track of all the tiles in a room String is the ID of the tile
@@ -20,12 +25,47 @@ public class FloorPlan {
 
 	public FloorPlan(){
 		this.roomLayout = new HashMap<>();
-		buildGenericFloorPlan();
+//		buildGenericFloorPlan();
 		//System.out.println("something");
 	}
 
 	public Map<String, Tile> getFloorPlanMap(){
 		return roomLayout;
+	}
+
+	public void convertFileToFloorplan(String fileLocation){
+		try {
+			//create objects and import file
+			Gson gson = new Gson();
+			File file = new File(fileLocation);
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			//convert json file to tile array
+			Tile[] floorTiles = gson.fromJson(br, Tile[].class);
+			//add tiles in array to roomLayout
+			for(Tile tile: floorTiles){
+				roomLayout.put(tile.getId(), tile);
+			}
+
+			//get ids from surrounding tiles, pull them from the room layout map and add the tile object to each one
+			for(Tile tile: floorTiles){
+				String[] surroundingTiles = tile.getSurroundingTileID();
+				if(surroundingTiles[0] != null){
+					tile.setRightNext(roomLayout.get(surroundingTiles[0]));
+				}
+				if(surroundingTiles[1] != null){
+					tile.setLeftNext(roomLayout.get(surroundingTiles[1]));
+				}
+				if(surroundingTiles[2] != null){
+					tile.setTopNext(roomLayout.get(surroundingTiles[2]));
+				}
+				if(surroundingTiles[3] != null){
+					tile.setBottomNext(roomLayout.get(surroundingTiles[3]));
+				}
+			}
+			System.out.println("print to stop run");
+		} catch (Exception e){
+			System.out.println(e);
+		}
 	}
 
 //	public ArrayList<String> getRoomTiles(String roomID){
