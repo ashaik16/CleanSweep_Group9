@@ -28,8 +28,6 @@ public class FloorPlan {
 
 	public FloorPlan(){
 		this.roomLayout = new HashMap<>();
-//		buildGenericFloorPlan();
-		//System.out.println("something");
 	}
 
 	public Map<String, Tile> getFloorPlanMap(){
@@ -65,28 +63,11 @@ public class FloorPlan {
 					tile.setBottomNext(roomLayout.get(surroundingTiles[3]));
 				}
 			}
-			System.out.println("print to stop run");
+			System.out.println("Floor plan successfully loaded from file");
 		} catch (Exception e){
 			System.out.println(e);
 		}
 	}
-
-//	public ArrayList<String> getRoomTiles(String roomID){
-//		return roomLayout.get(roomID);
-//	}
-
-//	public void addTileToRoom(String roomID, String tile){
-//		ArrayList<String> tempList = roomLayout.get(roomID);
-//		tempList.add(tile);
-//		roomLayout.put(roomID, tempList);
-//	}
-
-//	public String addNewRoom(){
-//		String roomID = UUID.randomUUID().toString();
-//		ArrayList<String> roomTiles = new ArrayList<>();
-//		roomLayout.put(roomID, roomTiles);
-//		return roomID;
-//	}
 
 	public void buildGenericFloorPlan(){
 		Random random = new Random();
@@ -155,6 +136,7 @@ public class FloorPlan {
 		//get tile g3 in order to make it the the charging station
 		Tile chargingStation = roomLayout.get("g3");
 		chargingStation.setChargingStation(true);
+		System.out.println("Floor plan has successfully been built");
 	}
 
 	public void writeFloorPlanToFile(){
@@ -168,17 +150,10 @@ public class FloorPlan {
 			gson.toJson(floorTiles, writer);
 			writer.flush();
 			writer.close();
+			System.out.println("Floor plan saved to file");
 		} catch (Exception e){
 			System.out.println(e);
 		}
 
 	}
-//
-//	public void removeRoom(String roomID){
-//		roomLayout.remove(roomID);
-//	}
-
-//	public void loadFloorPlan(JSObject floorPlan){
-//		// add logic based on the JSON file that is sent
-//	}
 }
