@@ -1,17 +1,20 @@
 package com.group9.cleansweep.controlsystem;
 
+
+import com.google.gson.annotations.Expose;
+
 public class Tile {
-	private String id;
-	private String surfaceType;
-	private Boolean isObstacle;
-	private int dirtAmount;
-	private boolean isChargingStation;
-	private boolean visited;
-	private String rightID;
-	private String leftID;
-	private String topID;
-	private String bottomID;
-	private Tile rightNext;
+	@Expose private String id;
+	@Expose private String surfaceType;
+	@Expose private Boolean isObstacle;
+	@Expose private int dirtAmount;
+	@Expose private boolean isChargingStation;
+	@Expose private boolean visited;
+	@Expose private String rightID;
+	@Expose private String leftID;
+	@Expose private String topID;
+	@Expose private String bottomID;
+	private Tile  rightNext;
 	private Tile leftNext;
 	private Tile topNext;
 	private Tile bottomNext;
@@ -32,6 +35,46 @@ public class Tile {
 
 	public String[] getSurroundingTileID(){
 		return new String[]{rightID, leftID, topID, bottomID};
+	}
+
+	public void setSurroundingTileID(Tile tile){
+		try{
+			if(tile.getRightNext() == null){
+				this.rightID = null;
+			} else{
+				this.rightID = tile.getRightNext().id;
+			}
+		} catch(Exception e){
+			//ignore NPE if thrown
+		}
+		try{
+			if(tile.getLeftNext() == null){
+				this.leftID = null;
+			} else{
+				this.leftID = tile.getLeftNext().id;
+			}
+		}catch(Exception e){
+			//ignore NPE if thrown
+		}
+		try{
+			if(tile.getTopNext() == null){
+				this.topID = null;
+			} else{
+				this.topID = tile.getTopNext().id;
+			}
+		}catch(Exception e){
+			//ignore NPE if thrown
+		}
+		try{
+			if(tile.getBottomNext() == null){
+				this.bottomID = null;
+			} else{
+				this.bottomID = tile.getBottomNext().id;
+			}
+		}catch(Exception e){
+			//ignore NPE if thrown
+		}
+
 	}
 
 	public void setSurfaceType(String surfaceType){

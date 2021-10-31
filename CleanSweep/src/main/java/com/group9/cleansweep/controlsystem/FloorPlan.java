@@ -3,15 +3,18 @@ package com.group9.cleansweep.controlsystem;
 //import netscape.javascript.JSObject;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
 import lombok.Getter;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 public class FloorPlan {
 	//this keeps track of all the tiles in a room String is the ID of the tile
@@ -85,7 +88,7 @@ public class FloorPlan {
 //		return roomID;
 //	}
 
-	private void buildGenericFloorPlan(){
+	public void buildGenericFloorPlan(){
 		Random random = new Random();
 		String[] alpha = {"a", "b", "c", "d", "e", "f", "g"};
 		//these loops create the tiles and add them to the map
@@ -152,6 +155,23 @@ public class FloorPlan {
 		//get tile g3 in order to make it the the charging station
 		Tile chargingStation = roomLayout.get("g3");
 		chargingStation.setChargingStation(true);
+	}
+
+	public void writeFloorPlanToFile(){
+		Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
+		Tile[] floorTiles = roomLayout.values().toArray(new Tile[0]);
+		for(Tile tile: floorTiles){
+			tile.setSurroundingTileID(tile);
+		}
+		try{
+			FileWriter writer = new FileWriter("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor" + UUID.randomUUID() +".json");
+			gson.toJson(floorTiles, writer);
+			writer.flush();
+			writer.close();
+		} catch (Exception e){
+			System.out.println(e);
+		}
+
 	}
 //
 //	public void removeRoom(String roomID){
