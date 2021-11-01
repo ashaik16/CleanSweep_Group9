@@ -26,10 +26,10 @@ public class CleanSweep {
 
 	public void doWorkFromFile(String fileLocation){
 		FloorPlan floorPlan = new FloorPlan();
-		floorPlan.convertFileToFloorPlan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
+		floorPlan.convertFileToFloorplan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
 		DirtDetection dirtDetection = new DirtDetection();
 		dirtDetectionProcess(floorPlan);
-	
+
 	}
 
 	public void dirtDetectionProcess(FloorPlan floorPlan) {
