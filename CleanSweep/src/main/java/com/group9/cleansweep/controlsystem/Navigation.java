@@ -11,12 +11,13 @@ public class Navigation {
 	// need a method that returns boolean for is cleaning done
 	Stack<Tile> visited;
 	Tile currentPos = new Tile();
-	FloorPlan floorPlan = new FloorPlan();
+	FloorPlan floorPlan;
 
 	Map<String, Tile> floorPlanMap;
 
-	public Navigation() {
+	public Navigation(FloorPlan floorPlan) {
 		this.visited = new Stack<>();
+		this.floorPlan = floorPlan;
 		this.floorPlanMap = floorPlan.getFloorPlanMap();
 
 
