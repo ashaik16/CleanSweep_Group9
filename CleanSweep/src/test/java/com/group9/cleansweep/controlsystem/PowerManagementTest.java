@@ -64,7 +64,7 @@ public class PowerManagementTest {
 
 		double cuurentUnitOfPower = 10.0;
 
-		powerManagement.checkUnitOfPower(cuurentUnitOfPower);
+		powerManagement.checkIfMinimumPowerCapacityReached(cuurentUnitOfPower);
 	}
 
 }
