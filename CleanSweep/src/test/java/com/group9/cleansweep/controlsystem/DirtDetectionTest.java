@@ -38,10 +38,10 @@ public class DirtDetectionTest {
 
 		testName = "t1checkRandomDirtAssignedIsNotNull";
 		printTestName(testName);
-
-		Map<String, Tile> floorPlanMap = floorPlan.getFloorPlanMap();
+		floorPlan.buildGenericFloorPlan();
+	
 		dirtDetection.setRandomDirt(floorPlan);
-		for (Map.Entry<String, Tile> entry : floorPlanMap.entrySet()) {
+		for (Map.Entry<String, Tile> entry : floorPlan.getFloorPlanMap().entrySet()) {
 			// System.out.println(entry.getValue().getDirtAmount());
 			assertTrue((entry.getValue().getDirtAmount() >= 0));
 
