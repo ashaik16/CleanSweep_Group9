@@ -33,6 +33,7 @@ public class CleanSweep {
 		Navigation navigation = new Navigation(floorPlan);
 		DirtDetection dirtDetection = new DirtDetection();
 		dirtDetectionProcess(floorPlan);
+	
 	}
 
 	public void dirtDetectionProcess(FloorPlan floorPlan) {
