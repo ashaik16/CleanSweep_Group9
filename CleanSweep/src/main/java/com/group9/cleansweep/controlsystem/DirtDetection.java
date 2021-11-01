@@ -1,17 +1,16 @@
 package com.group9.cleansweep.controlsystem;
 
-import java.util.Map;
-import java.util.Random;
-
 import com.group9.cleansweep.Enum.DirtAmountEnum;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Map;
+import java.util.Random;
+import java.util.Map.Entry;
 
 public class DirtDetection {
 
 	@Getter
-	// private final int maxDirtLevel =4;
 	private final int totalDirtCapacity = 50;
 	@Getter
 	@Setter
@@ -25,34 +24,41 @@ public class DirtDetection {
 	@Getter
 	@Setter
 	private boolean isDirtCapacityFull = false;
-
-	// private randomDirt() -> random between 0-maxDirtLevel
-	// dirt number reduces from capacity
-	// public detect dirt
-	// public clean dirt(int dirtNum)
-	// loop print statement
-	// call power management to subtract power for cleaning
-	// public boolean isDirtFull()
-	// print please change dirt tank
-	// public void emptyDirtTank()
-	// totalDirtCapcity = 50;
+	@Getter
+	@Setter
+	private boolean isMinimumPowerCapacityReached = false;
+	private static DirtDetection dirtDetecting = new DirtDetection();
+	
 
 	public void dirtDetectionProcess(FloorPlan floorPlan) {
-		DirtDetection dirtDetecting = new DirtDetection();
+	
 		Map<String, Tile> floorPlanDirtMap = dirtDetecting.setRandomDirt(floorPlan);
+		PowerManagement powerManagement=new PowerManagement();
 		
-		for (Map.Entry<String, Tile> entry : floorPlanDirtMap.entrySet()) {
-			Tile tile = entry.getValue();
-			dirtDetecting.cleanDirt(tile);
+		Entry<String, Tile> currentTile = null;
+		for (Map.Entry<String, Tile> tile : floorPlanDirtMap.entrySet()) {
+	
+			Entry<String, Tile> previousTile = currentTile;
+			currentTile = tile;
+			int dirtAmount=tile.getValue().getDirtAmount();
+		
+			dirtDetecting.cleanDirt(tile.getValue());
+			
+			isMinimumPowerCapacityReached=powerManagement.powerManagementProcess(previousTile,currentTile,tile,dirtAmount);
+			
+			if(isMinimumPowerCapacityReached)
+				break;
 			if (!dirtDetecting.isDirtCapacityFull) {
 				System.out.println("-------------------------------");
 				System.out.println(" Moving to the next tile...");
 				System.out.println("-------------------------------");
-			} else
-				break;
+			} 
+//			else
+//				break;
+		
 		}
 		
-		if (!dirtDetecting.isDirtCapacityFull)
+		if (!dirtDetecting.isDirtCapacityFull && !(isMinimumPowerCapacityReached))
 			System.out.println("Tracking Cycle completed....\n ");
 		System.out.println("\nCurrent Dirt Amount per tile:\n");
 		
@@ -99,20 +105,19 @@ public class DirtDetection {
 					statusCheck.setStatus("\nClean Sweep Dirt Capacity Full !!!!\n");
 					System.out.println("Please empty the dirt tank !!!");
 					System.out.println("-----------------------------------------");
-
 					emptyDirtTank();
-					break;
+			
 				}
 				
 				tile.setDirtAmount(dirtCount);
-				System.out.println("Cuurent Dirt Amount of " + tile.getId() + " : " + dirtCount);
+				System.out.println("Current Dirt Amount of " + tile.getId() + " : " + dirtCount);
 			}
 
 		}
 
 	}
 
-	private void emptyDirtTank() {
+	public void emptyDirtTank() {
 		totalDirtCollected = 0;
 
 		System.out.println("Dirt tank emptied!! Clean sweep is ready to vacuum again..");

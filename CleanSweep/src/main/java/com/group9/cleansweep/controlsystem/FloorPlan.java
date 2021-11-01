@@ -2,11 +2,19 @@ package com.group9.cleansweep.controlsystem;
 
 //import netscape.javascript.JSObject;
 
-import java.util.*;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
-
 import lombok.Getter;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 public class FloorPlan {
 	//this keeps track of all the tiles in a room String is the ID of the tile
@@ -20,32 +28,46 @@ public class FloorPlan {
 
 	public FloorPlan(){
 		this.roomLayout = new HashMap<>();
-		buildGenericFloorPlan();
-		//System.out.println("something");
 	}
 
 	public Map<String, Tile> getFloorPlanMap(){
 		return roomLayout;
 	}
 
-//	public ArrayList<String> getRoomTiles(String roomID){
-//		return roomLayout.get(roomID);
-//	}
+	public Tile getTile(String id){
+		return roomLayout.get(id);
+	}
 
-//	public void addTileToRoom(String roomID, String tile){
-//		ArrayList<String> tempList = roomLayout.get(roomID);
-//		tempList.add(tile);
-//		roomLayout.put(roomID, tempList);
-//	}
+	public Tile getFirstTile(){
+		for(Tile tile: roomLayout.values()){
+			if(tile.isChargingStation()){
+				return tile;
+			}
+		}
+		return roomLayout.get("a1");
+	}
 
-//	public String addNewRoom(){
-//		String roomID = UUID.randomUUID().toString();
-//		ArrayList<String> roomTiles = new ArrayList<>();
-//		roomLayout.put(roomID, roomTiles);
-//		return roomID;
-//	}
+	public void convertFileToFloorPlan(String fileLocation){
+		try {
+			//create objects and import file
+			Gson gson = new Gson();
+			File file = new File(fileLocation);
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			//convert json file to tile array
+			Tile[] floorTiles = gson.fromJson(br, Tile[].class);
+			//add tiles in array to roomLayout
+			for(Tile tile: floorTiles){
+				roomLayout.put(tile.getId(), tile);
+			}
 
-	private void buildGenericFloorPlan(){
+
+			System.out.println("Floor plan successfully loaded from file");
+		} catch (Exception e){
+			System.out.println(e);
+		}
+	}
+
+	public void buildGenericFloorPlan(){
 		Random random = new Random();
 		String[] alpha = {"a", "b", "c", "d", "e", "f", "g"};
 		//these loops create the tiles and add them to the map
@@ -65,45 +87,44 @@ public class FloorPlan {
 		//these loops go and attempt to get all the tiles in all directions catches the out of bounds and ignores it
 		for(int z = 0; z < 7; z++){
 			Tile tempTile;
+			String tempID;
 			String letter = alpha[z];
 			for(int x = 1; x <= 7; x++ ){
+				String targetTile = letter + x;
+				tempTile = roomLayout.get(targetTile);
 				//try getting the top tile above target
 				try{
-					String targetTile = letter + x;
-					tempTile = roomLayout.get(targetTile);
 					String tileAbove = alpha[z-1] + x;
-					Tile upTile = roomLayout.get(tileAbove);
-					tempTile.setTopNext(upTile);
+					if(roomLayout.containsKey(tileAbove)){
+						tempTile.setTopNext(tileAbove);
+					}
 				} catch(Exception e){
 					//ignore
 				}
 				//try getting the bottom tile above target
 				try{
-					String targetTile = letter + x;
-					tempTile = roomLayout.get(targetTile);
 					String tileBelow = alpha[z+1] + x;
-					Tile bottomTile = roomLayout.get(tileBelow);
-					tempTile.setBottomNext(bottomTile);
+					if(roomLayout.containsKey(tileBelow)){
+						tempTile.setBottomNext(tileBelow);
+					}
 				} catch(Exception e){
 					//ignore
 				}
 				//try getting the right tile above target
 				try{
-					String targetTile = letter + x;
-					tempTile = roomLayout.get(targetTile);
-					String tileRight = letter + (x+1);
-					Tile rightTile = roomLayout.get(tileRight);
-					tempTile.setRightNext(rightTile);
+					String tileRight = alpha[z] + (x+1);
+					if(roomLayout.containsKey(tileRight)){
+						tempTile.setRightNext(tileRight);
+					}
 				} catch(Exception e){
 					//ignore
 				}
 				//try getting the left tile above target
 				try{
-					String targetTile = letter + x;
-					tempTile = roomLayout.get(targetTile);
-					String tileLeft = letter + (x-1);
-					Tile leftTile = roomLayout.get(tileLeft);
-					tempTile.setLeftNext(leftTile);
+					String tileLeft = alpha[z] + (x-1);
+					if(roomLayout.containsKey(tileLeft)){
+						tempTile.setLeftNext(tileLeft);
+					}
 				} catch(Exception e){
 					//ignore
 				}
@@ -112,13 +133,21 @@ public class FloorPlan {
 		//get tile g3 in order to make it the the charging station
 		Tile chargingStation = roomLayout.get("g3");
 		chargingStation.setChargingStation(true);
+		System.out.println("Floor plan has successfully been built");
 	}
-//
-//	public void removeRoom(String roomID){
-//		roomLayout.remove(roomID);
-//	}
 
-//	public void loadFloorPlan(JSObject floorPlan){
-//		// add logic based on the JSON file that is sent
-//	}
+	public void writeFloorPlanToFile(){
+		Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
+		Tile[] floorTiles = roomLayout.values().toArray(new Tile[0]);
+		try{
+			FileWriter writer = new FileWriter("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor" + UUID.randomUUID() +".json");
+			gson.toJson(floorTiles, writer);
+			writer.flush();
+			writer.close();
+			System.out.println("Floor plan saved to file");
+		} catch (Exception e){
+			System.out.println(e);
+		}
+
+	}
 }

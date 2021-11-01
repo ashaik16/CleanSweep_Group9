@@ -1,52 +1,56 @@
 package com.group9.cleansweep.controlsystem;
 
+
+import com.google.gson.annotations.Expose;
+
 public class Tile {
+	@Expose private String id;
+	@Expose private String surfaceType;
+	@Expose private Boolean isObstacle;
+	@Expose private int dirtAmount;
+	@Expose private boolean isChargingStation;
+	@Expose private boolean visited;
+	@Expose private String rightID;
+	@Expose private String leftID;
+	@Expose private String topID;
+	@Expose private String bottomID;
 
-	private String surfaceType;
-	private int dirtAmount;
-
-	private boolean isChargingStation;
-
-	private boolean visited;
-
-	private Tile rightNext;
-	private Tile leftNext;
-	private Tile topNext;
-	private Tile bottomNext;
-	private String id;
-	private Boolean isObstacle;
 	
 	Tile() {
 		this.id = null;
 		this.surfaceType = null;
-		this.leftNext = null;
-		this.rightNext = null;
-		this.topNext = null;
-		this.bottomNext = null;
 		this.dirtAmount = 0;
 		this.isChargingStation = false;
 		this.isObstacle = false;
 		this.visited = false;
+		this.rightID = null;
+		this.leftID = null;
+		this.topID = null;
+		this.bottomID = null;
+	}
+
+	public String[] getSurroundingTileID(){
+		return new String[]{rightID, leftID, topID, bottomID};
 	}
 
 	public void setSurfaceType(String surfaceType){
 		this.surfaceType = surfaceType;
 	}
 
-	public void setLeftNext(Tile leftNext){
-		this.leftNext = leftNext;
+	public void setLeftNext(String leftNext){
+		leftID = leftNext;
 	}
 
-	public void setRightNext(Tile rightTile){
-		rightNext = rightTile;
+	public void setRightNext(String rightTile){
+		rightID = rightTile;
 	}
 
-	public void setTopNext(Tile topNext){
-		this.topNext = topNext;
+	public void setTopNext(String topNext){
+		topID = topNext;
 	}
 
-	public void setBottomNext(Tile bottomNext){
-		this.bottomNext = bottomNext;
+	public void setBottomNext(String bottomNext){
+		bottomID = bottomNext;
 	}
 
 	public void setDirtAmount(int dirtAmount){
@@ -86,20 +90,20 @@ public class Tile {
 		return visited;
 	}
 
-	public Tile getRightNext() {
-		return rightNext;
+	public String getRightNext() {
+		return rightID;
 	}
 
-	public Tile getLeftNext() {
-		return leftNext;
+	public String getLeftNext() {
+		return leftID;
 	}
 
-	public Tile getTopNext() {
-		return topNext;
+	public String getTopNext() {
+		return topID;
 	}
 
-	public Tile getBottomNext() {
-		return bottomNext;
+	public String getBottomNext() {
+		return bottomID;
 	}
 
 	public String getId() {

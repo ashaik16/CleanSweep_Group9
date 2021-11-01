@@ -1,8 +1,5 @@
 package com.group9.cleansweep.controlsystem;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public class CleanSweep {
 
 	/*
@@ -14,34 +11,29 @@ public class CleanSweep {
 	 * 
 	 */
 
-	@Getter
-	private Long id;
+	public CleanSweep(){
 
-	@Getter
-	@Setter
-	FloorPlan floorPlan;
-	@Getter
-	@Setter
-	ObstacleDetection obstacleDetection;
-	@Getter
-	@Setter
-	DirtDetection dirtDetection;
-	@Getter
-	@Setter
-	Navigation navigation;
-	@Getter
-	@Setter
-	PowerManagement powerManagement;
+
+	}
 
 	public void doWork() {
 		FloorPlan floorPlan = new FloorPlan();
-
-		// System.out.println("We are doing work in the Clean sweep");
+		floorPlan.buildGenericFloorPlan();
+		DirtDetection dirtDetection = new DirtDetection();
 		dirtDetectionProcess(floorPlan);
+		floorPlan.writeFloorPlanToFile();
+	}
+
+	public void doWorkFromFile(String fileLocation){
+		FloorPlan floorPlan = new FloorPlan();
+		floorPlan.convertFileToFloorPlan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
+		DirtDetection dirtDetection = new DirtDetection();
+		dirtDetectionProcess(floorPlan);
+	
 	}
 
 	public void dirtDetectionProcess(FloorPlan floorPlan) {
-		DirtDetection dirtDetecting = new DirtDetection();
-		dirtDetecting.dirtDetectionProcess(floorPlan);
+		DirtDetection dirtDetection = new DirtDetection();
+		dirtDetection.dirtDetectionProcess(floorPlan);
 	}
 }
