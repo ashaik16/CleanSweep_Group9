@@ -14,43 +14,87 @@ public class Tile {
 	@Expose private String leftID;
 	@Expose private String topID;
 	@Expose private String bottomID;
+	private Tile  rightNext;
+	private Tile leftNext;
+	private Tile topNext;
+	private Tile bottomNext;
 
 	
 	Tile() {
 		this.id = null;
 		this.surfaceType = null;
+		this.leftNext = null;
+		this.rightNext = null;
+		this.topNext = null;
+		this.bottomNext = null;
 		this.dirtAmount = 0;
 		this.isChargingStation = false;
 		this.isObstacle = false;
 		this.visited = false;
-		this.rightID = null;
-		this.leftID = null;
-		this.topID = null;
-		this.bottomID = null;
 	}
 
 	public String[] getSurroundingTileID(){
 		return new String[]{rightID, leftID, topID, bottomID};
 	}
 
+	public void setSurroundingTileID(Tile tile){
+		try{
+			if(tile.getRightNext() == null){
+				this.rightID = null;
+			} else{
+				this.rightID = tile.getRightNext().id;
+			}
+		} catch(Exception e){
+			//ignore NPE if thrown
+		}
+		try{
+			if(tile.getLeftNext() == null){
+				this.leftID = null;
+			} else{
+				this.leftID = tile.getLeftNext().id;
+			}
+		}catch(Exception e){
+			//ignore NPE if thrown
+		}
+		try{
+			if(tile.getTopNext() == null){
+				this.topID = null;
+			} else{
+				this.topID = tile.getTopNext().id;
+			}
+		}catch(Exception e){
+			//ignore NPE if thrown
+		}
+		try{
+			if(tile.getBottomNext() == null){
+				this.bottomID = null;
+			} else{
+				this.bottomID = tile.getBottomNext().id;
+			}
+		}catch(Exception e){
+			//ignore NPE if thrown
+		}
+
+	}
+
 	public void setSurfaceType(String surfaceType){
 		this.surfaceType = surfaceType;
 	}
 
-	public void setLeftNext(String leftNext){
-		leftID = leftNext;
+	public void setLeftNext(Tile leftNext){
+		this.leftNext = leftNext;
 	}
 
-	public void setRightNext(String rightTile){
-		rightID = rightTile;
+	public void setRightNext(Tile rightTile){
+		rightNext = rightTile;
 	}
 
-	public void setTopNext(String topNext){
-		topID = topNext;
+	public void setTopNext(Tile topNext){
+		this.topNext = topNext;
 	}
 
-	public void setBottomNext(String bottomNext){
-		bottomID = bottomNext;
+	public void setBottomNext(Tile bottomNext){
+		this.bottomNext = bottomNext;
 	}
 
 	public void setDirtAmount(int dirtAmount){
@@ -67,6 +111,10 @@ public class Tile {
 
 	public void setID(String id){
 		this.id = id;
+	}
+
+	public void setVisited(boolean visited) {
+		this.visited = visited;
 	}
 
 
@@ -86,20 +134,20 @@ public class Tile {
 		return visited;
 	}
 
-	public String getRightNext() {
-		return rightID;
+	public Tile getRightNext() {
+		return rightNext;
 	}
 
-	public String getLeftNext() {
-		return leftID;
+	public Tile getLeftNext() {
+		return leftNext;
 	}
 
-	public String getTopNext() {
-		return topID;
+	public Tile getTopNext() {
+		return topNext;
 	}
 
-	public String getBottomNext() {
-		return bottomID;
+	public Tile getBottomNext() {
+		return bottomNext;
 	}
 
 	public String getId() {

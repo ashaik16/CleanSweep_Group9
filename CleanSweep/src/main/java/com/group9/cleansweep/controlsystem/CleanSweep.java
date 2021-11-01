@@ -19,21 +19,17 @@ public class CleanSweep {
 	public void doWork() {
 		FloorPlan floorPlan = new FloorPlan();
 		floorPlan.buildGenericFloorPlan();
-		Navigation navigation = new Navigation(floorPlan);
 		DirtDetection dirtDetection = new DirtDetection();
-		Tile startingPoint = navigation.getFirstTile();
-		Tile nextTile = navigation.getNextTile(startingPoint);
 		dirtDetectionProcess(floorPlan);
 		floorPlan.writeFloorPlanToFile();
 	}
 
 	public void doWorkFromFile(String fileLocation){
 		FloorPlan floorPlan = new FloorPlan();
-		floorPlan.convertFileToFloorPlan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
-		Navigation navigation = new Navigation(floorPlan);
+		floorPlan.convertFileToFloorplan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
 		DirtDetection dirtDetection = new DirtDetection();
 		dirtDetectionProcess(floorPlan);
-	
+
 	}
 
 	public void dirtDetectionProcess(FloorPlan floorPlan) {

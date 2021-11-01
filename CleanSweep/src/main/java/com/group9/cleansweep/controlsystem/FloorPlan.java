@@ -34,20 +34,7 @@ public class FloorPlan {
 		return roomLayout;
 	}
 
-	public Tile getTile(String id){
-		return roomLayout.get(id);
-	}
-
-	public Tile getFirstTile(){
-		for(Tile tile: roomLayout.values()){
-			if(tile.isChargingStation()){
-				return tile;
-			}
-		}
-		return roomLayout.get("a1");
-	}
-
-	public void convertFileToFloorPlan(String fileLocation){
+	public void convertFileToFloorplan(String fileLocation){
 		try {
 			//create objects and import file
 			Gson gson = new Gson();
@@ -58,6 +45,23 @@ public class FloorPlan {
 			//add tiles in array to roomLayout
 			for(Tile tile: floorTiles){
 				roomLayout.put(tile.getId(), tile);
+			}
+
+			//get ids from surrounding tiles, pull them from the room layout map and add the tile object to each one
+			for(Tile tile: floorTiles){
+				String[] surroundingTiles = tile.getSurroundingTileID();
+				if(surroundingTiles[0] != null){
+					tile.setRightNext(roomLayout.get(surroundingTiles[0]));
+				}
+				if(surroundingTiles[1] != null){
+					tile.setLeftNext(roomLayout.get(surroundingTiles[1]));
+				}
+				if(surroundingTiles[2] != null){
+					tile.setTopNext(roomLayout.get(surroundingTiles[2]));
+				}
+				if(surroundingTiles[3] != null){
+					tile.setBottomNext(roomLayout.get(surroundingTiles[3]));
+				}
 			}
 			System.out.println("Floor plan successfully loaded from file");
 		} catch (Exception e){
@@ -85,44 +89,45 @@ public class FloorPlan {
 		//these loops go and attempt to get all the tiles in all directions catches the out of bounds and ignores it
 		for(int z = 0; z < 7; z++){
 			Tile tempTile;
-			String tempID;
 			String letter = alpha[z];
 			for(int x = 1; x <= 7; x++ ){
-				String targetTile = letter + x;
-				tempTile = roomLayout.get(targetTile);
 				//try getting the top tile above target
 				try{
+					String targetTile = letter + x;
+					tempTile = roomLayout.get(targetTile);
 					String tileAbove = alpha[z-1] + x;
-					if(roomLayout.containsKey(tileAbove)){
-						tempTile.setTopNext(tileAbove);
-					}
+					Tile upTile = roomLayout.get(tileAbove);
+					tempTile.setTopNext(upTile);
 				} catch(Exception e){
 					//ignore
 				}
 				//try getting the bottom tile above target
 				try{
+					String targetTile = letter + x;
+					tempTile = roomLayout.get(targetTile);
 					String tileBelow = alpha[z+1] + x;
-					if(roomLayout.containsKey(tileBelow)){
-						tempTile.setBottomNext(tileBelow);
-					}
+					Tile bottomTile = roomLayout.get(tileBelow);
+					tempTile.setBottomNext(bottomTile);
 				} catch(Exception e){
 					//ignore
 				}
 				//try getting the right tile above target
 				try{
-					String tileRight = alpha[z] + (x+1);
-					if(roomLayout.containsKey(tileRight)){
-						tempTile.setRightNext(tileRight);
-					}
+					String targetTile = letter + x;
+					tempTile = roomLayout.get(targetTile);
+					String tileRight = letter + (x+1);
+					Tile rightTile = roomLayout.get(tileRight);
+					tempTile.setRightNext(rightTile);
 				} catch(Exception e){
 					//ignore
 				}
 				//try getting the left tile above target
 				try{
-					String tileLeft = alpha[z] + (x-1);
-					if(roomLayout.containsKey(tileLeft)){
-						tempTile.setLeftNext(tileLeft);
-					}
+					String targetTile = letter + x;
+					tempTile = roomLayout.get(targetTile);
+					String tileLeft = letter + (x-1);
+					Tile leftTile = roomLayout.get(tileLeft);
+					tempTile.setLeftNext(leftTile);
 				} catch(Exception e){
 					//ignore
 				}
@@ -137,6 +142,9 @@ public class FloorPlan {
 	public void writeFloorPlanToFile(){
 		Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
 		Tile[] floorTiles = roomLayout.values().toArray(new Tile[0]);
+		for(Tile tile: floorTiles){
+			tile.setSurroundingTileID(tile);
+		}
 		try{
 			FileWriter writer = new FileWriter("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor" + UUID.randomUUID() +".json");
 			gson.toJson(floorTiles, writer);
