@@ -19,9 +19,49 @@ public class CleanSweep {
 	public void doWork() {
 		FloorPlan floorPlan = new FloorPlan();
 		floorPlan.buildGenericFloorPlan();
+
 		DirtDetection dirtDetection = new DirtDetection();
-		dirtDetectionProcess(floorPlan);
-		floorPlan.writeFloorPlanToFile();
+		dirtDetection.setRandomDirt(floorPlan);
+
+		Navigation navigation = new Navigation(floorPlan);
+
+//		String currentTileId = navigation.currentPos.getId();
+		Tile startingTile = navigation.currentPos;
+		Tile currentTile = startingTile;
+		while (true) {
+			currentTile = navigation.currentPos;
+			dirtDetection.cleanDirt(currentTile);
+			if (currentTile.getDirtAmount() == 0) {
+				currentTile.setVisited(true);
+			}
+			else {
+				System.out.println("Dirt is probably full.  Stopping work.");
+				return;
+			}
+
+			if(navigation.isObstacleTop(currentTile).equals(true)) {
+				if(navigation.isObstacleRight(currentTile).equals(true)) {
+					if(navigation.isObstacleBottom(currentTile).equals(true)) {
+						if(navigation.isObstacleLeft(currentTile).equals(true)) {
+							System.out.println("Blocked on all sides.  Stopping cleaning.");
+							navigation.setTrackingCycleComplete(false);
+							break;
+						}
+						else {
+							navigation.traverseLeft(currentTile);
+						}
+					}
+					else {
+						navigation.traverseBottom(currentTile);
+					}
+				}
+				else navigation.traverseRight(currentTile);
+			}
+			else navigation.traverseTop(currentTile);
+
+		}
+//		dirtDetectionProcess(floorPlan);
+//		floorPlan.writeFloorPlanToFile();
 	}
 
 	public void doWorkFromFile(String fileLocation){
