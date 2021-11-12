@@ -125,6 +125,11 @@ public class Navigation {
 		return target;
 	}
 
+	private boolean isIgnoreIsVisited() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public Boolean isObstacleRight(Tile currentPos) {
 		if(currentPos.getRightNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getRightNext().getId() + " as obstacle to the right.");
@@ -186,6 +191,11 @@ public class Navigation {
 				return false;
 		}
 		return true;
+	}
+
+	public void setIgnoreIsVisited(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

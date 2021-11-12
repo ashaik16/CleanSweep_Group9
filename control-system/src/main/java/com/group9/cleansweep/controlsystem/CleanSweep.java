@@ -27,11 +27,11 @@ public class CleanSweep {
 		Tile currentTile = new Tile();
 
 
-<<<<<<< HEAD
+
 		//while (true) {
-=======
+
 //		while (true) {
->>>>>>> main
+
 			currentTile = navigation.currentPos;
 			//***dirtDetectionProcess needs to take in a tile instead***
 			dirtDetectionProcess(floorPlan);
