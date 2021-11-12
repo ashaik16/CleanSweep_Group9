@@ -10,6 +10,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.group9.cleansweep.FloorPlan;
+import com.group9.cleansweep.Tile;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DirtDetectionTest {
 

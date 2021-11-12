@@ -1,12 +1,15 @@
 package com.group9.cleansweep.controlsystem;
 
-import com.group9.cleansweep.Enum.DirtAmountEnum;
+
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Map;
 import java.util.Random;
 import java.util.Map.Entry;
+import com.group9.cleansweep.FloorPlan;
+import com.group9.cleansweep.Tile;
+import com.group9.sensor_simulator.DirtSensor;
 
 public class DirtDetection {
 
@@ -71,17 +74,18 @@ public class DirtDetection {
 
 	public Map<String, Tile> setRandomDirt(FloorPlan floorPlan) {
 		
-		Random random = new Random();
-		DirtAmountEnum randomDirtCapacityEnum;
-		DirtAmountEnum[] dirtCapacityEnum = DirtAmountEnum.values();
-		Map<String, Tile> floorPlanMap = floorPlan.getFloorPlanMap();
-		
-		for (Map.Entry<String, Tile> entry : floorPlanMap.entrySet()) {
-			randomDirtCapacityEnum = dirtCapacityEnum[random.nextInt(dirtCapacityEnum.length)];
-			entry.getValue().setDirtAmount(randomDirtCapacityEnum.getDirtPerFloorType());
-
-		}
-		return floorPlanMap;
+//		Random random = new Random();
+//		DirtAmountEnum randomDirtCapacityEnum;
+//		DirtAmountEnum[] dirtCapacityEnum = DirtAmountEnum.values();
+		//Map<String, Tile> floorPlanMap = floorPlan.getFloorPlanMap();
+//		
+//		for (Map.Entry<String, Tile> entry : floorPlanMap.entrySet()) {
+//			randomDirtCapacityEnum = dirtCapacityEnum[random.nextInt(dirtCapacityEnum.length)];
+//			entry.getValue().setDirtAmount(randomDirtCapacityEnum.getDirtPerFloorType());
+//
+//		}
+		DirtSensor dirtSensor=new DirtSensor();
+		return dirtSensor.setRandomDirt(floorPlan);
 	}
 
 	public void cleanDirt(Tile tile) {

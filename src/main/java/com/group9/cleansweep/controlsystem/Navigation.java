@@ -1,11 +1,13 @@
 package com.group9.cleansweep.controlsystem;
 
 import lombok.Getter;
+import com.group9.cleansweep.Tile;
+
 import lombok.Setter;
 
 import java.util.Map;
 import java.util.Stack;
-
+import com.group9.cleansweep.FloorPlan;
 public class Navigation {
 	// this is where the stack/queue would be for tiles that have been visited
 	// need a method that returns boolean for is cleaning done

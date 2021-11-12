@@ -1,5 +1,7 @@
 package com.group9.cleansweep.controlsystem;
 
+import com.group9.cleansweep.FloorPlan;
+
 public class CleanSweep {
 
 	/*
