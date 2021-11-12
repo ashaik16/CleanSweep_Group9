@@ -15,6 +15,7 @@ public class App {
 
 		//cleanSweep.doWorkFromFile("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
 
+	
 //		PowerManagement powerManagementService = new PowerManagement();
 //		String currentfloorPlanType = "LOW_PILE_CARPET";
 //		String previousfloorPlanType = "BARE_FOOT";
