@@ -10,8 +10,8 @@ import com.group9.cleansweep.controlsystem.UnregisteredUI;
 public class App {
 	public static void main(String[] args) {
 		CleanSweep cleanSweep = new CleanSweep();
-		UnregisteredUI.UnregisteredUI(cleanSweep);
-//		cleanSweep.doWork();
+	UnregisteredUI.UnregisteredUI(cleanSweep);
+		//cleanSweep.doWork();
 
 		//cleanSweep.doWorkFromFile("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
 

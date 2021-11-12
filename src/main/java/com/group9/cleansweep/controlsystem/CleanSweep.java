@@ -27,7 +27,7 @@ public class CleanSweep {
 		Tile currentTile = new Tile();
 
 
-		while (true) {
+		//while (true) {
 			currentTile = navigation.currentPos;
 			//***dirtDetectionProcess needs to take in a tile instead***
 			dirtDetectionProcess(floorPlan);
@@ -59,7 +59,7 @@ public class CleanSweep {
 				}
 			}
 		}
-	}
+	//}
 
 	public void doWorkFromFile(String fileLocation){
 		FloorPlan floorPlan = new FloorPlan();
