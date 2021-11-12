@@ -1,6 +1,5 @@
 package com.group9.cleansweep.controlsystem;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
