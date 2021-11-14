@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
 import lombok.Getter;
 //import com.group9.sensor_simulator.FloorTypeSimulator;
+import com.group9.sensor_simulator.DirtSensor;
 
 import java.io.BufferedReader;
 import java.io.File;
