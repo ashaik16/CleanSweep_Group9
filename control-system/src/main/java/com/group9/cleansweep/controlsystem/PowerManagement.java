@@ -34,16 +34,16 @@ public class PowerManagement {
 
 	private final double minimumCapacityForPowerUnit = 10.0;
 	  private static final DecimalFormat df = new DecimalFormat("0.00");
-	public boolean powerManagementProcess(Entry<String, Tile> previousTile, Entry<String, Tile> currentTile, Entry<String, Tile> tile, int dirtAmount) {
+	public boolean powerManagementProcess(Tile previousTile, Tile currentTile, int dirtAmount) {
 
 	String previousSurfaceType = "";
 		String currentSurfaceType = "";
 		double unitOfCharge = 0.0;
-			currentTile.getValue().setSurfaceType(FloorTypeSimulator.getInstance().getRandomFloorType());
-			currentSurfaceType = currentTile.getValue().getSurfaceType();
-			if (previousTile != null && !(currentSurfaceType.equals(previousTile.getValue().getSurfaceType()))) {
+			currentTile.setSurfaceType(FloorTypeSimulator.getInstance().getRandomFloorType());
+			currentSurfaceType = currentTile.getSurfaceType();
+			if (previousTile != null && !(currentSurfaceType.equals(previousTile.getSurfaceType()))) {
 
-				previousSurfaceType = previousTile.getValue().getSurfaceType();
+				previousSurfaceType = previousTile.getSurfaceType();
 				unitOfCharge = getAverageUnitOfCharge(currentSurfaceType, previousSurfaceType);
 				
 			} else 

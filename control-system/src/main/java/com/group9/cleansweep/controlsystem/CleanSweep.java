@@ -26,24 +26,25 @@ public class CleanSweep {
 		floorPlan.buildGenericFloorPlan();
 		Navigation navigation = new Navigation(floorPlan);
 		DirtDetection dirtDetection = new DirtDetection();
+		dirtDetection.setRandomDirt(floorPlan);
+		PowerManagement powerManagement = new PowerManagement();
 		Tile currentTile = new Tile();
-
 
 
 		//while (true) {
 
 //		while (true) {
-
+			Tile tempTile = currentTile;
 			currentTile = navigation.currentPos;
 			//***dirtDetectionProcess needs to take in a tile instead***
-			dirtDetectionProcess(floorPlan);
+
+			dirtDetectionProcess(tempTile, currentTile);
 			currentTile = navigation.traverseTop(currentTile);
 			//Insert battery check logic here:
 
 			//This will check if all 4 directions become blocked somehow.
 			if (currentTile.equals(null))
 				return;
-
 			//If you navigate to a new tile and it is visited, check to see if ALL tiles are visited.
 			if (currentTile.isVisited()) {
 				navigation.setIgnoreIsVisited(true);
@@ -67,16 +68,16 @@ public class CleanSweep {
 		}
 	//}
 
-	public void doWorkFromFile(String fileLocation){
-		FloorPlan floorPlan = new FloorPlan();
-		floorPlan.convertFileToFloorplan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
-		DirtDetection dirtDetection = new DirtDetection();
-		dirtDetectionProcess(floorPlan);
+//	public void doWorkFromFile(String fileLocation){
+//		FloorPlan floorPlan = new FloorPlan();
+//		floorPlan.convertFileToFloorplan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
+//		DirtDetection dirtDetection = new DirtDetection();
+//		dirtDetectionProcess(floorPlan);
+//
+//	}
 
-	}
-
-	public void dirtDetectionProcess(FloorPlan floorPlan) {
+	public void dirtDetectionProcess(Tile previousTile, Tile currentTile) {
 		DirtDetection dirtDetection = new DirtDetection();
-		dirtDetection.dirtDetectionProcess(floorPlan);
+		dirtDetection.dirtDetectionProcess(previousTile, currentTile);
 	}
 }
