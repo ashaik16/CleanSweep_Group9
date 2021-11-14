@@ -24,11 +24,6 @@
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>com.group9</groupId>
-      <artifactId>control-system</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>

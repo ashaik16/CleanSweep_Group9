@@ -11,7 +11,7 @@ public class FloorTypeSimulator {
 	private final String[] floorTypes = {"BARE_FOOT", "LOW_PILE_CARPET", "HIGH_PILE_CARPET"};
 	private Random random;
 
-	FloorTypeSimulator(){
+	public FloorTypeSimulator(){
 		random = new Random();
 	}
 
