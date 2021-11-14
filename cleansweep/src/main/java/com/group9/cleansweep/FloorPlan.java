@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
 import lombok.Getter;
+import com.group9.sensor_simulator.FloorTypeSimulator;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,7 +22,6 @@ public class FloorPlan {
 	//this keeps track of all the tiles in a room String is the ID of the tile
 	private final Map<String, Tile> roomLayout;
 	private Map<String, Boolean> tileVisitedMap;
-	private final String[] floorTypes = {"BARE_FOOT", "LOW_PILE_CARPET", "HIGH_PILE_CARPET"};
 	private final Boolean[] isObstacle = {true, false};
 
 	@Getter
@@ -72,6 +72,7 @@ public class FloorPlan {
 
 	public void buildGenericFloorPlan(){
 		Random random = new Random();
+		FloorTypeSimulator floorTypeSimulator = new FloorTypeSimulator;
 		String[] alpha = {"a", "b", "c", "d", "e", "f", "g"};
 		//these loops create the tiles and add them to the map
 		for(int i = 0; i < 7; i++){
@@ -79,7 +80,7 @@ public class FloorPlan {
 			for(int j = 1; j <= 7; j++ ){
 				Tile tempTile = new Tile();
 				//setting tile to random floor type declared at top of class
-				tempTile.setSurfaceType(floorTypes[random.nextInt(floorTypes.length)]);
+				tempTile.setSurfaceType(floorTypeSimulator.getRandomFloorType());
 				//tile is randomly an obstacle or not
 				tempTile.setIsObstacle(isObstacle[random.nextInt(isObstacle.length)]);
 				String tempID = letter + j;
