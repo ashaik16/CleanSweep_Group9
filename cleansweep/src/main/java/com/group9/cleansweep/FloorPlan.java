@@ -8,7 +8,6 @@ import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
 import lombok.Getter;
 //import com.group9.sensor_simulator.FloorTypeSimulator;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
