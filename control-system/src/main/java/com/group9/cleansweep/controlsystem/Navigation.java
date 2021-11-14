@@ -2,6 +2,7 @@ package com.group9.cleansweep.controlsystem;
 
 import lombok.Getter;
 import com.group9.cleansweep.Tile;
+import com.group9.sensor_simulator.ObstacleSimulator;
 
 import lombok.Setter;
 
@@ -14,6 +15,7 @@ public class Navigation {
 	Stack<Tile> visited;
 	Tile currentPos = new Tile();
 	FloorPlan floorPlan;
+	ObstacleSimulator obstacleSimulator;
 
 	Map<String, Tile> floorPlanMap;
 
@@ -21,6 +23,7 @@ public class Navigation {
 		this.visited = new Stack<>();
 		this.floorPlan = floorPlan;
 		this.floorPlanMap = floorPlan.getFloorPlanMap();
+		this.obstacleSimulator = new ObstacleSimulator();
 
 		// Assuming charging station is start
 		// set current position to the charging station
@@ -131,6 +134,7 @@ public class Navigation {
 	}
 
 	public Boolean isObstacleRight(Tile currentPos) {
+		currentPos.getRightNext().setIsObstacle(obstacleSimulator.getRandomObstacle());
 		if(currentPos.getRightNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getRightNext().getId() + " as obstacle to the right.");
 			return true;
@@ -138,6 +142,7 @@ public class Navigation {
 	}
 
 	public Boolean isObstacleLeft(Tile currentPos) {
+		currentPos.getLeftNext().setIsObstacle(obstacleSimulator.getRandomObstacle());
 		if(currentPos.getLeftNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getLeftNext().getId() + " as obstacle to the left.");
 			return true;
@@ -145,6 +150,7 @@ public class Navigation {
 	}
 
 	public Boolean isObstacleTop(Tile currentPos) {
+		currentPos.getTopNext().setIsObstacle(obstacleSimulator.getRandomObstacle());
 		if(currentPos.getTopNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getTopNext().getId() + " as obstacle above.");
 			return true;
@@ -155,6 +161,7 @@ public class Navigation {
 	}
 
 	public Boolean isObstacleBottom(Tile currentPos) {
+		currentPos.getBottomNext().setIsObstacle(obstacleSimulator.getRandomObstacle());
 		if(currentPos.getBottomNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getBottomNext().getId() + " as obstacle below.");
 			return true;

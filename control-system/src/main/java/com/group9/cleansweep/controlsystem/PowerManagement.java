@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import com.group9.cleansweep.FloorPlan;
 import com.group9.cleansweep.Tile;
+import com.group9.sensor_simulator.FloorTypeSimulator;
 public class PowerManagement {
 
 	@Getter
@@ -38,8 +39,8 @@ public class PowerManagement {
 	String previousSurfaceType = "";
 		String currentSurfaceType = "";
 		double unitOfCharge = 0.0;
-		
-
+			FloorTypeSimulator floorTypeSimulator = new FloorTypeSimulator();
+			currentTile.getValue().setSurfaceType(floorTypeSimulator.getRandomFloorType());
 			currentSurfaceType = currentTile.getValue().getSurfaceType();
 			if (previousTile != null && !(currentSurfaceType.equals(previousTile.getValue().getSurfaceType()))) {
 
