@@ -32,43 +32,11 @@ public class DirtDetection {
 	private static DirtDetection dirtDetecting = new DirtDetection();
 	
 
-	public void dirtDetectionProcess(FloorPlan floorPlan) {
-	
-		Map<String, Tile> floorPlanDirtMap = dirtDetecting.setRandomDirt(floorPlan);
-		PowerManagement powerManagement=new PowerManagement();
-		
-		Entry<String, Tile> currentTile = null;
-		for (Map.Entry<String, Tile> tile : floorPlanDirtMap.entrySet()) {
-	
-			Entry<String, Tile> previousTile = currentTile;
-			currentTile = tile;
-			int dirtAmount=tile.getValue().getDirtAmount();
-		
-			dirtDetecting.cleanDirt(tile.getValue());
-			
-			isMinimumPowerCapacityReached=powerManagement.powerManagementProcess(previousTile,currentTile,tile,dirtAmount);
-			
-			if(isMinimumPowerCapacityReached)
-				break;
-			if (!dirtDetecting.isDirtCapacityFull) {
-				System.out.println("-------------------------------");
-				System.out.println(" Moving to the next tile...");
-				System.out.println("-------------------------------");
-			} 
-//			else
-//				break;
-		
-		}
-		
-		if (!dirtDetecting.isDirtCapacityFull && !(isMinimumPowerCapacityReached))
-			System.out.println("Tracking Cycle completed....\n ");
-		System.out.println("\nCurrent Dirt Amount per tile:\n");
-		
-		for (Map.Entry<String, Tile> entry : floorPlanDirtMap.entrySet()) {
+	public void dirtDetectionProcess(Tile tile) {
 
-			System.out.println("Key = " + entry.getKey() + ", Dirt Amount = " + entry.getValue().getDirtAmount());
-		}
-
+		//Here we should call setRandomDirt from simulator
+		System.out.println("Beginning cleaning of tile " + tile.getId());
+		dirtDetecting.cleanDirt(tile);
 	}
 
 	public Map<String, Tile> setRandomDirt(FloorPlan floorPlan) {
@@ -88,6 +56,8 @@ public class DirtDetection {
 	}
 
 	public void cleanDirt(Tile tile) {
+		//inserting this set method here for now until we implement the simulator
+		tile.setDirtAmount(2);
 		int dirtAmount = tile.getDirtAmount();
 		dirtCount = tile.getDirtAmount();
 		System.out.println("Total Dirt Amount of tile " + tile.getId() + ": " + tile.getDirtAmount());

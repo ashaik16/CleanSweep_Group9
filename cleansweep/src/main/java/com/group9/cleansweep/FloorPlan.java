@@ -4,7 +4,8 @@ package com.group9.cleansweep;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
+import com.group9.cleansweep.Enum.FloorPlanTypeEnumCtrl;
+import com.group9.cleansweep.Enum.FloorPlanTypeEnumCleanSweep;
 import lombok.Getter;
 
 import java.io.BufferedReader;
@@ -25,7 +26,7 @@ public class FloorPlan {
 	private final Boolean[] isObstacle = {true, false};
 
 	@Getter
-	FloorPlanTypeEnum floorPlanType;
+	FloorPlanTypeEnumCleanSweep floorPlanType;
 
 	public FloorPlan(){
 		this.roomLayout = new HashMap<>();
