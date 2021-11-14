@@ -1,18 +1,21 @@
 package com.group9.sensor_simulator;
 
-import java.util.Map;
 import java.util.Random;
 
-import com.group9.cleansweep.FloorPlan;
-import com.group9.cleansweep.Tile;
-import com.group9.sensor_simulator.Enum.DirtAmountEnum;
-
 public class FloorTypeSimulator {
+	private static FloorTypeSimulator instance = null;
 	private final String[] floorTypes = {"BARE_FOOT", "LOW_PILE_CARPET", "HIGH_PILE_CARPET"};
-	private Random random;
+	private final Random random;
 
-	public FloorTypeSimulator(){
+	private FloorTypeSimulator(){
 		random = new Random();
+	}
+
+	public static FloorTypeSimulator getInstance(){
+		if(instance == null){
+			instance = new FloorTypeSimulator();
+		}
+		return instance;
 	}
 
 	public String getRandomFloorType(){

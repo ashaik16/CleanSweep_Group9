@@ -39,8 +39,7 @@ public class PowerManagement {
 	String previousSurfaceType = "";
 		String currentSurfaceType = "";
 		double unitOfCharge = 0.0;
-			FloorTypeSimulator floorTypeSimulator = new FloorTypeSimulator();
-			currentTile.getValue().setSurfaceType(floorTypeSimulator.getRandomFloorType());
+			currentTile.getValue().setSurfaceType(FloorTypeSimulator.getInstance().getRandomFloorType());
 			currentSurfaceType = currentTile.getValue().getSurfaceType();
 			if (previousTile != null && !(currentSurfaceType.equals(previousTile.getValue().getSurfaceType()))) {
 
