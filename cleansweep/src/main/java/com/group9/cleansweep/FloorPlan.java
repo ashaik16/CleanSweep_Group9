@@ -23,6 +23,7 @@ public class FloorPlan {
 	private final Map<String, Tile> roomLayout;
 	private Map<String, Boolean> tileVisitedMap;
 	private final Boolean[] isObstacle = {true, false};
+	private final String[] floorTypes = {"BARE_FOOT", "LOW_PILE_CARPET", "HIGH_PILE_CARPET"};
 
 	@Getter
 	FloorPlanTypeEnum floorPlanType;
