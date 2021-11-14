@@ -2,6 +2,7 @@ package com.group9.cleansweep.controlsystem;
 
 import lombok.Getter;
 import com.group9.cleansweep.Tile;
+import com.group9.sensor_simulator.ObstacleSimulator;
 
 import lombok.Setter;
 
@@ -131,6 +132,7 @@ public class Navigation {
 	}
 
 	public Boolean isObstacleRight(Tile currentPos) {
+		currentPos.getRightNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getRightNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getRightNext().getId() + " as obstacle to the right.");
 			return true;
@@ -138,6 +140,7 @@ public class Navigation {
 	}
 
 	public Boolean isObstacleLeft(Tile currentPos) {
+		currentPos.getLeftNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getLeftNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getLeftNext().getId() + " as obstacle to the left.");
 			return true;
@@ -145,6 +148,7 @@ public class Navigation {
 	}
 
 	public Boolean isObstacleTop(Tile currentPos) {
+		currentPos.getTopNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getTopNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getTopNext().getId() + " as obstacle above.");
 			return true;
@@ -155,6 +159,7 @@ public class Navigation {
 	}
 
 	public Boolean isObstacleBottom(Tile currentPos) {
+		currentPos.getBottomNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getBottomNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getBottomNext().getId() + " as obstacle below.");
 			return true;

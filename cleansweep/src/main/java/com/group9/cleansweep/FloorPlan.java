@@ -21,8 +21,8 @@ public class FloorPlan {
 	//this keeps track of all the tiles in a room String is the ID of the tile
 	private final Map<String, Tile> roomLayout;
 	private Map<String, Boolean> tileVisitedMap;
-	private final String[] floorTypes = {"BARE_FOOT", "LOW_PILE_CARPET", "HIGH_PILE_CARPET"};
 	private final Boolean[] isObstacle = {true, false};
+	private final String[] floorTypes = {"BARE_FOOT", "LOW_PILE_CARPET", "HIGH_PILE_CARPET"};
 
 	@Getter
 	FloorPlanTypeEnum floorPlanType;

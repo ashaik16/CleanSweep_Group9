@@ -2,6 +2,8 @@ package com.group9.cleansweep.controlsystem;
 
 import com.group9.cleansweep.FloorPlan;
 import com.group9.cleansweep.Tile;
+import com.group9.sensor_simulator.FloorTypeSimulator;
+
 
 public class CleanSweep {
 
