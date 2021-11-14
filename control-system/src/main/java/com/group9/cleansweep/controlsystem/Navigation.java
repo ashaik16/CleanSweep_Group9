@@ -15,6 +15,7 @@ public class Navigation {
 	Stack<Tile> visited;
 	Tile currentPos = new Tile();
 	FloorPlan floorPlan;
+	private Boolean ignoreIsVisited = false;
 
 	Map<String, Tile> floorPlanMap;
 
@@ -37,93 +38,63 @@ public class Navigation {
 		}
 	}
 
-	public Tile traverseTop(Tile target) {
-		if (isIgnoreIsVisited()) {
-			if (isObstacleTop(target.getTopNext()) && target.getTopNext().isVisited()) {
+	public Tile traverse(Tile target){
+		// always start with top and move through the other methods
+		return traverseTop(target);
+	}
+
+	private Tile traverseTop(Tile target) {
+		if (isObstacleTop(target) && target.getTopNext().isVisited()) {
+			return traverseRight(target);
+		}
+		else if (isObstacleTop(target)){
 				return traverseRight(target);
-			}
-		}
-		else if (!isIgnoreIsVisited()) {
-			if (isObstacleTop(target.getTopNext())) {
-				return traverseRight(target);
-			}
 		}
 		else {
-			currentPos.setRightNext(target.getRightNext());
-			currentPos.setLeftNext(target.getLeftNext());
-			currentPos.setTopNext(target);
-			currentPos.setBottomNext(currentPos);
 			target.setVisited(true);
-			System.out.println("Traversed up from tile " + currentPos.getBottomNext().getId() + " to tile " + currentPos.getId() + ".");
+			System.out.println("Traversed up from tile " +  target.getId() + " to tile " + target.getTopNext().getId() + ".");
+			return target.getTopNext();
 		}
-		return target;
 	}
 
-	public Tile traverseRight(Tile target) {
-		if (isIgnoreIsVisited()) {
-			if (isObstacleRight(target.getRightNext()) && target.getRightNext().isVisited()) {
-				return traverseBottom(target);
-			}
+	private Tile traverseRight(Tile target) {
+		if (isObstacleRight(target) && target.getRightNext().isVisited()){
+			return traverseBottom(target);
 		}
-		else if (!isIgnoreIsVisited()) {
-			if (isObstacleRight(target.getRightNext())) {
-				return traverseBottom(target);
-			}
+		else if (isObstacleRight(target)){
+			return traverseBottom(target);
 		}
 		else {
-			currentPos.setRightNext(target);
-			currentPos.setLeftNext(currentPos);
-			currentPos.setTopNext(target.getTopNext());
-			currentPos.setBottomNext(target.getBottomNext());
 			target.setVisited(true);
-			System.out.println("Traversed right from tile " + currentPos.getLeftNext().getId() + " to tile " + currentPos.getId() + ".");
+			System.out.println("Traversed right from tile " + target.getRightNext().getId() + " to tile " + target.getId() + ".");
+			return target.getRightNext();
 		}
-		return target;
 	}
 
-	public Tile traverseBottom(Tile target){
-		if (isIgnoreIsVisited()) {
-			if (isObstacleBottom(target.getBottomNext()) && target.getBottomNext().isVisited()) {
-				return traverseLeft(target);
-			}
+	private Tile traverseBottom(Tile target){
+		if (isObstacleBottom(target) && target.getBottomNext().isVisited()){
+			return traverseLeft(target);
 		}
-		else if (!isIgnoreIsVisited()) {
-			if (isObstacleBottom(target.getBottomNext())) {
-				return traverseLeft(target);
-			}
-		}
-		else {
-			currentPos.setRightNext(target.getRightNext());
-			currentPos.setLeftNext(target.getLeftNext());
-			currentPos.setTopNext(currentPos);
-			currentPos.setBottomNext(target);
+		else if (isObstacleBottom(target)){
+			return traverseLeft(target);
+		} else{
 			target.setVisited(true);
-			System.out.println("Traversed down from tile " + currentPos.getTopNext().getId() + " to tile " + currentPos.getId() + ".");
+			System.out.println("Traversed down from tile " + target.getBottomNext().getId() + " to tile " + target.getId() + ".");
+			return target.getBottomNext();
 		}
-		return target;
 	}
 
-	public Tile traverseLeft(Tile target) {
-		if (isIgnoreIsVisited()) {
-			if (isObstacleLeft(target.getLeftNext()) && target.getLeftNext().isVisited()) {
-				System.out.println("Clean Sweep encountered an obstacle on all sides.  Stopping.");
-				return null;
-			}
-		}
-		else if (!isIgnoreIsVisited()) {
-			if (isObstacleLeft(target.getLeftNext())) {
-				return null;
-			}
-		}
-		else {
-			currentPos.setRightNext(currentPos);
-			currentPos.setLeftNext(target);
-			currentPos.setTopNext(target.getTopNext());
-			currentPos.setBottomNext(target.getBottomNext());
+	private Tile traverseLeft(Tile target) {
+		if (isObstacleLeft(target) && target.getLeftNext().isVisited()){
+			return traverseRight(target);
+		} else if(isObstacleLeft(target)){
+			System.out.println("Clean Sweep encountered an obstacle on all sides.  Stopping.");
+			return target;
+		} else {
 			target.setVisited(true);
-			System.out.println("Traversed left from tile " + currentPos.getRightNext().getId() + " to tile " + currentPos.getId() + ".");
+			System.out.println("Traversed down from tile " + target.getLeftNext().getId() + " to tile " + target.getId() + ".");
+			return target.getLeftNext();
 		}
-		return target;
 	}
 
 	private boolean isIgnoreIsVisited() {
@@ -131,35 +102,34 @@ public class Navigation {
 		return false;
 	}
 
-	public Boolean isObstacleRight(Tile currentPos) {
-		currentPos.getRightNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
+	private Boolean isObstacleRight(Tile currentPos) {
+//		currentPos.getRightNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getRightNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getRightNext().getId() + " as obstacle to the right.");
 			return true;
 		} else return false;
 	}
 
-	public Boolean isObstacleLeft(Tile currentPos) {
-		currentPos.getLeftNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
+	private Boolean isObstacleLeft(Tile currentPos) {
+//		currentPos.getLeftNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getLeftNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getLeftNext().getId() + " as obstacle to the left.");
 			return true;
 		} else return false;
 	}
 
-	public Boolean isObstacleTop(Tile currentPos) {
-		currentPos.getTopNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
+	private Boolean isObstacleTop(Tile currentPos) {
+//		currentPos.getTopNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getTopNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getTopNext().getId() + " as obstacle above.");
 			return true;
 		} else {
-			isObstacleRight(currentPos);
 			return false;
 		}
 	}
 
-	public Boolean isObstacleBottom(Tile currentPos) {
-		currentPos.getBottomNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
+	private Boolean isObstacleBottom(Tile currentPos) {
+//		currentPos.getBottomNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getBottomNext().getObstacle()) {
 			System.out.println("Detected tile " + currentPos.getBottomNext().getId() + " as obstacle below.");
 			return true;
@@ -177,13 +147,6 @@ public class Navigation {
 
 
 
-//	@Getter
-//	@Setter
-//	private boolean isVisited = false;
-
-	@Getter
-	@Setter
-	public boolean ignoreIsVisited = false;
 
 	public boolean isCycleComplete() {
 		Tile checkTile = new Tile();
@@ -196,6 +159,10 @@ public class Navigation {
 				return false;
 		}
 		return true;
+	}
+
+	public void resetIgnoreIsVisited(){
+		ignoreIsVisited = false;
 	}
 
 	public void setIgnoreIsVisited(boolean b) {
