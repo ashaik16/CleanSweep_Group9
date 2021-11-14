@@ -6,6 +6,7 @@ import java.util.Random;
 public class ObstacleSimulator {
     private static ObstacleSimulator obstacleSimulator_instance = null;
     private final Random random;
+    private final Boolean[] randomBool = {true, true, true, false, false, true, true, true, false, true};
     private ObstacleSimulator(){random = new Random();
     }
 
@@ -17,8 +18,8 @@ public class ObstacleSimulator {
     }
 
     public Boolean getRandomObstacle(){
-
-        return random.nextBoolean();
+        //did it this way to bias towards not being an obstacle
+        return randomBool[random.nextInt(randomBool.length)];
     }
 
 
