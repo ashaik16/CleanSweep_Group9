@@ -27,14 +27,11 @@ public class CleanSweep {
 		Tile currentTile = new Tile();
 
 
-
-		//while (true) {
-
-//		while (true) {
+		while (true) {
 
 			currentTile = navigation.currentPos;
 			//***dirtDetectionProcess needs to take in a tile instead***
-			dirtDetectionProcess(floorPlan);
+			dirtDetectionProcess(currentTile);
 			currentTile = navigation.traverseTop(currentTile);
 			//Insert battery check logic here:
 
@@ -63,18 +60,18 @@ public class CleanSweep {
 				}
 			}
 		}
-	//}
-
-	public void doWorkFromFile(String fileLocation){
-		FloorPlan floorPlan = new FloorPlan();
-		floorPlan.convertFileToFloorplan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
-		DirtDetection dirtDetection = new DirtDetection();
-		dirtDetectionProcess(floorPlan);
-
 	}
 
-	public void dirtDetectionProcess(FloorPlan floorPlan) {
+//	public void doWorkFromFile(String fileLocation){
+//		FloorPlan floorPlan = new FloorPlan();
+//		floorPlan.convertFileToFloorplan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
+//		DirtDetection dirtDetection = new DirtDetection();
+//		dirtDetectionProcess(floorPlan);
+//
+//	}
+
+	public void dirtDetectionProcess(Tile tile) {
 		DirtDetection dirtDetection = new DirtDetection();
-		dirtDetection.dirtDetectionProcess(floorPlan);
+		dirtDetection.dirtDetectionProcess(tile);
 	}
 }
