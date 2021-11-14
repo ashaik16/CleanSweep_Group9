@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.group9.cleansweep.Enum.FloorPlanTypeEnum;
 import lombok.Getter;
-import com.group9.sensor_simulator.FloorTypeSimulator;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -73,7 +72,6 @@ public class FloorPlan {
 
 	public void buildGenericFloorPlan(){
 		Random random = new Random();
-		FloorTypeSimulator floorTypeSimulator = new FloorTypeSimulator();
 		String[] alpha = {"a", "b", "c", "d", "e", "f", "g"};
 		//these loops create the tiles and add them to the map
 		for(int i = 0; i < 7; i++){
@@ -81,8 +79,7 @@ public class FloorPlan {
 			for(int j = 1; j <= 7; j++ ){
 				Tile tempTile = new Tile();
 				//setting tile to random floor type declared at top of class
-//				tempTile.setSurfaceType(floorTypes[random.nextInt(floorTypes.length)]);
-				tempTile.setSurfaceType(floorTypeSimulator.getRandomFloorType());
+				tempTile.setSurfaceType(floorTypes[random.nextInt(floorTypes.length)]);
 				//tile is randomly an obstacle or not
 				tempTile.setIsObstacle(isObstacle[random.nextInt(isObstacle.length)]);
 				String tempID = letter + j;
