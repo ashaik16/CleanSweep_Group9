@@ -32,43 +32,32 @@ public class DirtDetection {
 	private static DirtDetection dirtDetecting = new DirtDetection();
 	
 
-	public void dirtDetectionProcess(FloorPlan floorPlan) {
-	
-		Map<String, Tile> floorPlanDirtMap = dirtDetecting.setRandomDirt(floorPlan);
+	public boolean dirtDetectionProcess(Tile previousTile, Tile currentTile) {
+
 		PowerManagement powerManagement=new PowerManagement();
+
+			int dirtAmount=currentTile.getDirtAmount();
 		
-		Entry<String, Tile> currentTile = null;
-		for (Map.Entry<String, Tile> tile : floorPlanDirtMap.entrySet()) {
-	
-			Entry<String, Tile> previousTile = currentTile;
-			currentTile = tile;
-			int dirtAmount=tile.getValue().getDirtAmount();
-		
-			dirtDetecting.cleanDirt(tile.getValue());
+			dirtDetecting.cleanDirt(currentTile);
 			
-			isMinimumPowerCapacityReached=powerManagement.powerManagementProcess(previousTile,currentTile,tile,dirtAmount);
+			isMinimumPowerCapacityReached=powerManagement.powerManagementProcess(previousTile,currentTile,dirtAmount);
 			
 			if(isMinimumPowerCapacityReached)
-				break;
-			if (!dirtDetecting.isDirtCapacityFull) {
-				System.out.println("-------------------------------");
-				System.out.println(" Moving to the next tile...");
-				System.out.println("-------------------------------");
-			} 
+				return true;
+			else
+
+
 //			else
 //				break;
-		
-		}
 		
 		if (!dirtDetecting.isDirtCapacityFull && !(isMinimumPowerCapacityReached))
 			System.out.println("Tracking Cycle completed....\n ");
 		System.out.println("\nCurrent Dirt Amount per tile:\n");
-		
-		for (Map.Entry<String, Tile> entry : floorPlanDirtMap.entrySet()) {
 
-			System.out.println("Key = " + entry.getKey() + ", Dirt Amount = " + entry.getValue().getDirtAmount());
-		}
+			System.out.println("Key = " + currentTile + ", Dirt Amount = " + currentTile.getDirtAmount());
 
+
+			return false;
 	}
 
 	public Map<String, Tile> setRandomDirt(FloorPlan floorPlan) {
