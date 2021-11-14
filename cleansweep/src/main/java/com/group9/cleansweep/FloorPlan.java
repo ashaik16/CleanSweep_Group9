@@ -72,7 +72,7 @@ public class FloorPlan {
 
 	public void buildGenericFloorPlan(){
 		Random random = new Random();
-		FloorTypeSimulator floorTypeSimulator = new FloorTypeSimulator;
+		FloorTypeSimulator floorTypeSimulator = new FloorTypeSimulator();
 		String[] alpha = {"a", "b", "c", "d", "e", "f", "g"};
 		//these loops create the tiles and add them to the map
 		for(int i = 0; i < 7; i++){
