@@ -43,7 +43,7 @@ jobs:
             
          
         # Runs a set of commands for building Control System Maven Project
-      - name: Step 5 - Github Actions Building Maven Project
+      - name: Step 5 - Github Actions Building Control System Maven Project
         run: | 
             mvn install:install-file -Dfile=/home/runner/work/CleanSweep_Group9/CleanSweep_Group9/sensor-simulator/target/sensor-simulator-0.0.1-SNAPSHOT.jar -DgroupId=com.group9 -DartifactId=sensor-simulator -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar 
             mvn -B package --file  /home/runner/work/CleanSweep_Group9/CleanSweep_Group9/control-system/pom.xml
