@@ -39,8 +39,9 @@ public class DirtDetection {
 		return dirtSensor.setRandomDirt(floorPlan);
 	}
 
-	public void cleanDirt(Tile tile) {
+	public int cleanDirt(Tile tile, DirtDetection dirtDetection) {
 		int dirtAmount = tile.getDirtAmount();
+		int totalDirtCollected=dirtDetection.getTotalDirtCollected();
 		dirtCount = tile.getDirtAmount();
 		System.out.println("Total Dirt Amount of tile " + tile.getId() + ": " + tile.getDirtAmount());
 		
@@ -56,10 +57,9 @@ public class DirtDetection {
 
 				if (isDirtCapacityFull) {
 					StatusCheck statusCheck = new StatusCheck();
-					System.out.println("----------------------------------------");
-					statusCheck.setStatus("\nClean Sweep Dirt Capacity Full !!!!\n");
-					System.out.println("Please empty the dirt tank !!!");
-					System.out.println("-----------------------------------------");
+					System.out.println("-------------------------------------------------");
+					System.out.println(" DIRT TANK FULL !!!Please empty the dirt tank !!!");
+					System.out.println("-------------------------------------------------");
 					emptyDirtTank();
 			
 				}
@@ -69,6 +69,7 @@ public class DirtDetection {
 			}
 
 		}
+		return totalDirtCollected;
 
 	}
 

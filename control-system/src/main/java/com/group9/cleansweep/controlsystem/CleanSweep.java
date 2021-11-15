@@ -17,7 +17,9 @@ public class CleanSweep {
 	 * Power Management object
 	 * 
 	 */
-
+	DirtDetection dirtDetection = new DirtDetection();
+	PowerManagement powerManagement = new PowerManagement();
+	int totalDirtCollected=0;
 	public CleanSweep(){
 
 
@@ -27,8 +29,7 @@ public class CleanSweep {
 		FloorPlan floorPlan = new FloorPlan();
 		floorPlan.buildGenericFloorPlan();
 		Navigation navigation = new Navigation(floorPlan);
-		DirtDetection dirtDetection = new DirtDetection();
-		PowerManagement powerManagement = new PowerManagement();
+	
 		Tile firstTile = new Tile();
 		Tile previousTile = new Tile();
 		Tile nextTile = new Tile();
@@ -63,7 +64,8 @@ public class CleanSweep {
 				keepWorking = false;
 			}else
 			{
-				dirtDetection.cleanDirt(nextTile);
+				totalDirtCollected=dirtDetection.cleanDirt(nextTile,dirtDetection);
+				dirtDetection.setTotalDirtCollected(totalDirtCollected);
 				isMinimumPowerCapacityReached=powerManagement.powerManagementProcess(previousTile,nextTile,nextTile.getDirtAmount());
 		
 			}
