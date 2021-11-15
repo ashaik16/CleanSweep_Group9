@@ -53,7 +53,7 @@ public class CleanSweep {
 			}
 			
 			if(isMinimumPowerCapacityReached){
-				keepWorking = false;
+				break;
 			}
 			nextTile = navigation.traverse(previousTile);
 			
