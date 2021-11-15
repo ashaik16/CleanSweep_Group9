@@ -1,5 +1,7 @@
 package com.group9.cleansweep.controlsystem;
 
+import java.util.Map;
+
 import com.group9.cleansweep.FloorPlan;
 import com.group9.cleansweep.Tile;
 import com.group9.sensor_simulator.FloorTypeSimulator;
@@ -26,16 +28,18 @@ public class CleanSweep {
 		floorPlan.buildGenericFloorPlan();
 		Navigation navigation = new Navigation(floorPlan);
 		DirtDetection dirtDetection = new DirtDetection();
+		PowerManagement powerManagement = new PowerManagement();
 		Tile firstTile = new Tile();
 		Tile previousTile = new Tile();
 		Tile nextTile = new Tile();
 		Boolean keepWorking = true;
-
+		boolean isMinimumPowerCapacityReached=false;
 
 
 		//while (true) {
 		firstTile = navigation.currentPos;
 		nextTile = null;
+		Map<String, Tile> floorPlanDirtMap = dirtDetection.setRandomDirt(floorPlan);
 		while (keepWorking) {
 
 
@@ -47,12 +51,25 @@ public class CleanSweep {
 			} else{
 				previousTile = nextTile;
 			}
+			
 			nextTile = navigation.traverse(previousTile);
+		
 			if (nextTile == previousTile){
 				keepWorking = false;
 			} else if(navigation.isCycleComplete()){
 				keepWorking = false;
 			}
+			else if(isMinimumPowerCapacityReached){
+				keepWorking = false;
+			}
+			else
+			{
+				dirtDetection.cleanDirt(nextTile);
+				isMinimumPowerCapacityReached=powerManagement.powerManagementProcess(previousTile,nextTile,nextTile.getDirtAmount());
+		
+			}
+			
+	
 			//Insert battery check logic here:
 
 			//This will check if all 4 directions become blocked somehow.
@@ -79,19 +96,26 @@ public class CleanSweep {
 //					}
 //				}
 //			}
+		
+		}
+		
+		System.out.println("\nCurrent Dirt Amount per tile:\n");
+		for (Map.Entry<String, Tile> entry : floorPlanDirtMap.entrySet()) {
+
+			System.out.println("Key = " + entry.getKey() + ", Dirt Amount = " + entry.getValue().getDirtAmount());
 		}
 	}
-
-	public void doWorkFromFile(String fileLocation){
-		FloorPlan floorPlan = new FloorPlan();
-		floorPlan.convertFileToFloorplan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
-		DirtDetection dirtDetection = new DirtDetection();
-		dirtDetectionProcess(floorPlan);
-
+	
+	public void dirtDetectionProcess() {
+		
 	}
+//	public void doWorkFromFile(String fileLocation){
+//		FloorPlan floorPlan = new FloorPlan();
+//		floorPlan.convertFileToFloorplan("src/main/java/com/group9/cleansweep/controlsystem/FloorPlanFile/SampleFloor.json");
+//		DirtDetection dirtDetection = new DirtDetection();
+//		dirtDetectionProcess(floorPlan);
+//
+//	}
+//
 
-	public void dirtDetectionProcess(FloorPlan floorPlan) {
-		DirtDetection dirtDetection = new DirtDetection();
-		dirtDetection.dirtDetectionProcess(floorPlan);
-	}
 }
