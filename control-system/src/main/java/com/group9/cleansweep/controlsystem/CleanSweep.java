@@ -33,36 +33,51 @@ public class CleanSweep {
 		Tile firstTile = new Tile();
 		Tile previousTile = new Tile();
 		Tile nextTile = new Tile();
+		Tile tempTile = new Tile();
 		Boolean keepWorking = true;
 		boolean isMinimumPowerCapacityReached=false;
+		String[] list = new String[200];
+		int i = 0;
 
-
-		//while (true) {
 		firstTile = navigation.currentPos;
 		nextTile = null;
 		Map<String, Tile> floorPlanDirtMap = dirtDetection.setRandomDirt(floorPlan);
+		System.out.println("Clean Sweep is starting on tile " + firstTile.getId());
 		while (keepWorking) {
 
 
-			//***dirtDetectionProcess needs to take in a tile instead***
-//			dirtDetectionProcess(floorPlan);
 			//for first time in the loop
 			if(nextTile == null){
 				previousTile = firstTile;
-			} else{
-				previousTile = nextTile;
 			}
-			
+			else if (nextTile.getId() == previousTile.getId()) {
+				System.out.println("We ran into a null tile.  Stopping shortly...");
+				keepWorking = false;
+			}
+			else{
+				System.out.println("Previous tile: " + previousTile.getId() + " NextTile: " + nextTile.getId());
+				list[i] = previousTile.getId();
+				i++;
+				previousTile = nextTile;
+				for (int g = 0; g < list.length ;g++) {
+					if (nextTile.getId() == list[g]) {
+						System.out.println("We've encountered multiple isVisited tiles in a row.  Returning to Power Station at the end of this cycle.");
+						keepWorking = false;
+					}
+				}
+			}
+
 			if(isMinimumPowerCapacityReached){
 				break;
 			}
 			nextTile = navigation.traverse(previousTile);
-			
-			if (nextTile == previousTile){
+
+
+
+			if(navigation.isCycleComplete()){
 				keepWorking = false;
-			} else if(navigation.isCycleComplete()){
-				keepWorking = false;
-			}else
+			}
+			else
 			{
 				totalDirtCollected=dirtDetection.cleanDirt(nextTile,dirtDetection);
 				dirtDetection.setTotalDirtCollected(totalDirtCollected);
