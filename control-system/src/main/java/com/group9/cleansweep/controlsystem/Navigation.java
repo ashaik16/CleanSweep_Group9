@@ -45,7 +45,9 @@ public class Navigation {
 
 	private Tile traverseTop(Tile target) {
 		try {
-			if (isObstacleTop(target)) {
+			if (!ignoreIsVisited && isObstacleTop(target) && target.getTopNext().isVisited()) {
+				return traverseRight(target);
+			} else if(ignoreIsVisited && isObstacleTop(target)){
 				return traverseRight(target);
 			}
 			else {
@@ -63,7 +65,9 @@ public class Navigation {
 
 	private Tile traverseRight(Tile target) {
 		try {
-			if (isObstacleRight(target)) {
+			if (!ignoreIsVisited && isObstacleRight(target) && target.getRightNext().isVisited()) {
+				return traverseBottom(target);
+			} else if(ignoreIsVisited && isObstacleRight(target)){
 				return traverseBottom(target);
 			}
 			else {
@@ -81,7 +85,9 @@ public class Navigation {
 
 	private Tile traverseBottom(Tile target){
 		try {
-			if (isObstacleBottom(target)) {
+			if (!ignoreIsVisited && isObstacleBottom(target) && target.getBottomNext().isVisited()) {
+				return traverseLeft(target);
+			} else if(ignoreIsVisited && isObstacleBottom(target)){
 				return traverseLeft(target);
 			}
 			else {
@@ -99,7 +105,10 @@ public class Navigation {
 
 	private Tile traverseLeft(Tile target) {
 		try {
-			if (isObstacleLeft(target)) {
+			if (!ignoreIsVisited && isObstacleLeft(target) && target.getLeftNext().isVisited()) {
+				ignoreIsVisited = true;
+				return traverseTop(target);
+			} else if (ignoreIsVisited && isObstacleLeft(target)){
 				System.out.println("Clean Sweep encountered an obstacle on all sides.  Stopping.");
 				return target;
 			}
