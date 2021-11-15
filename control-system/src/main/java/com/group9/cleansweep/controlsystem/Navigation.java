@@ -44,68 +44,84 @@ public class Navigation {
 	}
 
 	private Tile traverseTop(Tile target) {
-		if (isObstacleTop(target) && target.getTopNext().isVisited()) {
-			return traverseRight(target);
-		}
-		else if (isObstacleTop(target)){
+		try {
+			if (isObstacleTop(target)) {
 				return traverseRight(target);
+			}
+			else {
+				System.out.println("Top direction is clear.  Proceeding.");
+				target.setVisited(true);
+				System.out.println("Traversed up from tile " + target.getId() + " to tile " + target.getTopNext().getId() + ".");
+				return target.getTopNext();
+			}
 		}
-		else {
-			target.setVisited(true);
-			System.out.println("Traversed up from tile " +  target.getId() + " to tile " + target.getTopNext().getId() + ".");
-			return target.getTopNext();
+		catch(NullPointerException e) {
+			System.out.println("Encountered an invalid tile.  We'll try traversing to the right.  Here's the error: " + e);
+			return traverseRight(target);
 		}
 	}
 
 	private Tile traverseRight(Tile target) {
-		if (isObstacleRight(target) && target.getRightNext().isVisited()){
-			return traverseBottom(target);
+		try {
+			if (isObstacleRight(target)) {
+				return traverseBottom(target);
+			}
+			else {
+				System.out.println("Right direction is clear.  Proceeding.");
+				target.setVisited(true);
+				System.out.println("Traversed right from tile " + target.getId() + " to tile " + target.getRightNext().getId() + ".");
+				return target.getRightNext();
+			}
 		}
-		else if (isObstacleRight(target)){
+		catch(NullPointerException e) {
+			System.out.println("Encountered an invalid tile.  We'll try traversing Bottom.  Here's the error: " + e);
 			return traverseBottom(target);
-		}
-		else {
-			target.setVisited(true);
-			System.out.println("Traversed right from tile " + target.getRightNext().getId() + " to tile " + target.getId() + ".");
-			return target.getRightNext();
 		}
 	}
 
 	private Tile traverseBottom(Tile target){
-		if (isObstacleBottom(target) && target.getBottomNext().isVisited()){
-			return traverseLeft(target);
+		try {
+			if (isObstacleBottom(target)) {
+				return traverseLeft(target);
+			}
+			else {
+				System.out.println("Bottom direction is clear.  Proceeding.");
+				target.setVisited(true);
+				System.out.println("Traversed down from tile " + target.getId() + " to tile " + target.getBottomNext().getId() + ".");
+				return target.getBottomNext();
+			}
 		}
-		else if (isObstacleBottom(target)){
+		catch(NullPointerException e) {
+			System.out.println("Encountered an invalid tile.  We'll try traversing Left.  Here's the error: " + e);
 			return traverseLeft(target);
-		} else{
-			target.setVisited(true);
-			System.out.println("Traversed down from tile " + target.getBottomNext().getId() + " to tile " + target.getId() + ".");
-			return target.getBottomNext();
 		}
 	}
 
 	private Tile traverseLeft(Tile target) {
-		if (isObstacleLeft(target) && target.getLeftNext().isVisited()){
-			return traverseRight(target);
-		} else if(isObstacleLeft(target)){
-			System.out.println("Clean Sweep encountered an obstacle on all sides.  Stopping.");
+		try {
+			if (isObstacleLeft(target)) {
+				System.out.println("Clean Sweep encountered an obstacle on all sides.  Stopping.");
+				return target;
+			}
+			else {
+				System.out.println("Left direction is clear.  Proceeding.");
+				target.setVisited(true);
+				System.out.println("Traversed down from tile " + target.getId() + " to tile " + target.getLeftNext().getId() + ".");
+				return target.getLeftNext();
+			}
+		}
+		catch(NullPointerException e) {
+			System.out.println("Encountered an invalid tile.  Since all directions are checked, we'll stop here.  Here's the error: " + e);
 			return target;
-		} else {
-			target.setVisited(true);
-			System.out.println("Traversed down from tile " + target.getLeftNext().getId() + " to tile " + target.getId() + ".");
-			return target.getLeftNext();
 		}
 	}
 
-	private boolean isIgnoreIsVisited() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	private Boolean isObstacleRight(Tile currentPos) {
 //		currentPos.getRightNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getRightNext().getObstacle()) {
-			System.out.println("Detected tile " + currentPos.getRightNext().getId() + " as obstacle to the right.");
+			System.out.println("Detected tile " + currentPos.getRightNext().getId() + " as obstacle to the right. Checking Bottom Sensor");
 			return true;
 		} else return false;
 	}
@@ -113,7 +129,7 @@ public class Navigation {
 	private Boolean isObstacleLeft(Tile currentPos) {
 //		currentPos.getLeftNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getLeftNext().getObstacle()) {
-			System.out.println("Detected tile " + currentPos.getLeftNext().getId() + " as obstacle to the left.");
+			System.out.println("Detected tile " + currentPos.getLeftNext().getId() + " as obstacle to the left. Uh oh...");
 			return true;
 		} else return false;
 	}
@@ -121,7 +137,7 @@ public class Navigation {
 	private Boolean isObstacleTop(Tile currentPos) {
 //		currentPos.getTopNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getTopNext().getObstacle()) {
-			System.out.println("Detected tile " + currentPos.getTopNext().getId() + " as obstacle above.");
+			System.out.println("Detected tile " + currentPos.getTopNext().getId() + " as obstacle above. Checking Right Sensor.");
 			return true;
 		} else {
 			return false;
@@ -131,7 +147,7 @@ public class Navigation {
 	private Boolean isObstacleBottom(Tile currentPos) {
 //		currentPos.getBottomNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getBottomNext().getObstacle()) {
-			System.out.println("Detected tile " + currentPos.getBottomNext().getId() + " as obstacle below.");
+			System.out.println("Detected tile " + currentPos.getBottomNext().getId() + " as obstacle below. Checking Left Sensor.");
 			return true;
 		} else return false;
 	}
@@ -166,11 +182,13 @@ public class Navigation {
 	}
 
 	public void setIgnoreIsVisited(boolean b) {
-		// TODO Auto-generated method stub
-		
+		ignoreIsVisited = b;
 	}
 
-
+	private boolean isIgnoreIsVisited() {
+		// TODO Auto-generated method stub
+		return ignoreIsVisited;
+	}
 
 	// vv Done vv
 
