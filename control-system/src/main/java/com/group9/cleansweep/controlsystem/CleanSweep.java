@@ -62,7 +62,7 @@ public class CleanSweep {
 				for (int g = 0; g < list.length ;g++) {
 					if (nextTile.getId() == list[g]) {
 						System.out.println("We've encountered multiple isVisited tiles in a row.  Returning to Power Station at the end of this cycle.");
-//						keepWorking = false;
+						keepWorking = false;
 					}
 				}
 			}

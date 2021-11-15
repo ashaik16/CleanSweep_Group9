@@ -45,7 +45,7 @@ public class Navigation {
 
 	private Tile traverseTop(Tile target) {
 		try {
-			if (!ignoreIsVisited && isObstacleTop(target) && target.getTopNext().isVisited()) {
+			if ((!ignoreIsVisited && target.getTopNext().isVisited()) || isObstacleTop(target)) {
 				return traverseRight(target);
 			} else if(ignoreIsVisited && isObstacleTop(target)){
 				return traverseRight(target);
@@ -65,7 +65,7 @@ public class Navigation {
 
 	private Tile traverseRight(Tile target) {
 		try {
-			if (!ignoreIsVisited && isObstacleRight(target) && target.getRightNext().isVisited()) {
+			if ((!ignoreIsVisited && target.getRightNext().isVisited()) || isObstacleRight(target)) {
 				return traverseBottom(target);
 			} else if(ignoreIsVisited && isObstacleRight(target)){
 				return traverseBottom(target);
@@ -85,7 +85,7 @@ public class Navigation {
 
 	private Tile traverseBottom(Tile target){
 		try {
-			if (!ignoreIsVisited && isObstacleBottom(target) && target.getBottomNext().isVisited()) {
+			if ((!ignoreIsVisited && target.getBottomNext().isVisited()) || isObstacleBottom(target)) {
 				return traverseLeft(target);
 			} else if(ignoreIsVisited && isObstacleBottom(target)){
 				return traverseLeft(target);
@@ -105,7 +105,7 @@ public class Navigation {
 
 	private Tile traverseLeft(Tile target) {
 		try {
-			if (!ignoreIsVisited && isObstacleLeft(target) && target.getLeftNext().isVisited()) {
+			if ((!ignoreIsVisited && target.getLeftNext().isVisited()) || isObstacleLeft(target)) {
 				ignoreIsVisited = true;
 				return traverseTop(target);
 			} else if (ignoreIsVisited && isObstacleLeft(target)){
