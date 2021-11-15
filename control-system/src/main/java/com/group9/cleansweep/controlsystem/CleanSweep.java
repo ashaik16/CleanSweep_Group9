@@ -52,22 +52,23 @@ public class CleanSweep {
 				previousTile = nextTile;
 			}
 			
+			if(isMinimumPowerCapacityReached){
+				keepWorking = false;
+			}
 			nextTile = navigation.traverse(previousTile);
-		
+			
 			if (nextTile == previousTile){
 				keepWorking = false;
 			} else if(navigation.isCycleComplete()){
 				keepWorking = false;
-			}
-			else if(isMinimumPowerCapacityReached){
-				keepWorking = false;
-			}
-			else
+			}else
 			{
 				dirtDetection.cleanDirt(nextTile);
 				isMinimumPowerCapacityReached=powerManagement.powerManagementProcess(previousTile,nextTile,nextTile.getDirtAmount());
 		
 			}
+		
+		
 			
 	
 			//Insert battery check logic here:
