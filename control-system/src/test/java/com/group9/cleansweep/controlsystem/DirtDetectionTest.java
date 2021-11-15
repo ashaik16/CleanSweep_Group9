@@ -65,20 +65,20 @@ public class DirtDetectionTest {
 
 		}
 	}
-	//@Ignore
-	@Test
-	public void t3checkIfAllTilesCleaned() {
-
-		testName = "t3checkIfAllTilesCleaned";
-		printTestName(testName);
-
-		dirtDetection.dirtDetectionProcess(floorPlan);
-		Map<String, Tile> floorPlanMap = floorPlan.getFloorPlanMap();
-		for (Map.Entry<String, Tile> entry : floorPlanMap.entrySet()) {
-			assertTrue((entry.getValue().getDirtAmount() == 0));
-
-		}
-	}
+//	@Ignore
+//	@Test
+//	public void t3checkIfAllTilesCleaned() {
+//
+//		testName = "t3checkIfAllTilesCleaned";
+//		printTestName(testName);
+//
+//		dirtDetection.dirtDetectionProcess(floorPlan);
+//		Map<String, Tile> floorPlanMap = floorPlan.getFloorPlanMap();
+//		for (Map.Entry<String, Tile> entry : floorPlanMap.entrySet()) {
+//			assertTrue((entry.getValue().getDirtAmount() == 0));
+//
+//		}
+//	}
 
 	@Test
 	public void t4checkIfDirtTankIsFull() {

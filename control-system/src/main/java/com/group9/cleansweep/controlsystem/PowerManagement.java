@@ -32,18 +32,18 @@ public class PowerManagement {
 	private boolean isMimumumPowerCapacityReached=false;
 
 
-	private final double minimumCapacityForPowerUnit = 10.0;
+	private final double minimumCapacityForPowerUnit = 50.0;
 	  private static final DecimalFormat df = new DecimalFormat("0.00");
-	public boolean powerManagementProcess(Entry<String, Tile> previousTile, Entry<String, Tile> currentTile, Entry<String, Tile> tile, int dirtAmount) {
+	public boolean powerManagementProcess(Tile previousTile, Tile currentTile, int dirtAmount) {
 
 	String previousSurfaceType = "";
 		String currentSurfaceType = "";
 		double unitOfCharge = 0.0;
-			currentTile.getValue().setSurfaceType(FloorTypeSimulator.getInstance().getRandomFloorType());
-			currentSurfaceType = currentTile.getValue().getSurfaceType();
-			if (previousTile != null && !(currentSurfaceType.equals(previousTile.getValue().getSurfaceType()))) {
+			currentTile.setSurfaceType(FloorTypeSimulator.getInstance().getRandomFloorType());
+			currentSurfaceType = currentTile.getSurfaceType();
+			if (previousTile != null && !(currentSurfaceType.equals(previousTile.getSurfaceType()))) {
 
-				previousSurfaceType = previousTile.getValue().getSurfaceType();
+				previousSurfaceType = previousTile.getSurfaceType();
 				unitOfCharge = getAverageUnitOfCharge(currentSurfaceType, previousSurfaceType);
 				
 			} else 
@@ -60,7 +60,6 @@ public class PowerManagement {
 	public float getUnitOfCharge(String floorPlanType) {
 
 		float unitOfCharge = unitConsumedEnum.valueOf(floorPlanType).getUnitsConsumedPerFloorType();
-	//	System.out.println("UnitOfCharge: " + unitOfCharge);
 		return unitOfCharge;
 	}
 
@@ -72,15 +71,16 @@ public class PowerManagement {
 
 		float avgUnitOfCharge = (previousUnitOfCharge + currentUnitOfCharge) / 2;
 
-	//	System.out.println("Average Unit Of Charge: " + avgUnitOfCharge);
 		return avgUnitOfCharge;
 
 	}
 
 	public boolean checkIfMinimumPowerCapacityReached(double currentPowerUnit) {
+		
 		double remainingBattery=totalBatteryUnit-currentPowerUnit;
 		String batteryPercent= df.format((remainingBattery/totalBatteryUnit)*100);
-		System.out.println("\n Battery Power Remaining:"+batteryPercent+"%");
+		System.out.println("\n Battery Power Remaining:"+batteryPercent+"% \n");
+		
 		if (remainingBattery < minimumCapacityForPowerUnit) {
 			isMimumumPowerCapacityReached=true;
 			StatusCheck statusCheck = new StatusCheck();
