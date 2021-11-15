@@ -55,7 +55,7 @@ public class CleanSweep {
 				keepWorking = false;
 			}
 			else{
-				System.out.println("Previous tile: " + previousTile.getId() + " NextTile: " + nextTile.getId());
+				System.out.println("Previous tile: " + previousTile.getId() + " Next Tile: " + nextTile.getId());
 				list[i] = previousTile.getId();
 				i++;
 				previousTile = nextTile;

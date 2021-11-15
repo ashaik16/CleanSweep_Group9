@@ -56,7 +56,7 @@ public class Navigation {
 			}
 		}
 		catch(NullPointerException e) {
-			System.out.println("Encountered an invalid tile.  We'll try traversing to the right.  Here's the error: " + e);
+			System.out.println("Encountered a wall.  We'll try traversing to the right.");
 			return traverseRight(target);
 		}
 	}
@@ -74,7 +74,7 @@ public class Navigation {
 			}
 		}
 		catch(NullPointerException e) {
-			System.out.println("Encountered an invalid tile.  We'll try traversing Bottom.  Here's the error: " + e);
+			System.out.println("Encountered a wall.  We'll try traversing Bottom.");
 			return traverseBottom(target);
 		}
 	}
@@ -92,7 +92,7 @@ public class Navigation {
 			}
 		}
 		catch(NullPointerException e) {
-			System.out.println("Encountered an invalid tile.  We'll try traversing Left.  Here's the error: " + e);
+			System.out.println("Encountered a wall.  We'll try traversing Left.");
 			return traverseLeft(target);
 		}
 	}
@@ -111,7 +111,7 @@ public class Navigation {
 			}
 		}
 		catch(NullPointerException e) {
-			System.out.println("Encountered an invalid tile.  Since all directions are checked, we'll stop here.  Here's the error: " + e);
+			System.out.println("Encountered a wall.  Since all directions are checked, we'll stop here.");
 			return target;
 		}
 	}
