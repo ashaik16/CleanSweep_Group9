@@ -6,7 +6,7 @@ import java.util.Random;
 public class ObstacleSimulator {
     private static ObstacleSimulator obstacleSimulator_instance = null;
     private final Random random;
-    private final Boolean[] randomBool = {false, true, false, false, false, true, false, false, false, true, false, false};
+    private final Boolean[] randomBool = {false, false, false, false, false, false, false, true, false, false, false, true, false, false, false, true, false, false};
     private ObstacleSimulator(){random = new Random();
     }
 
