@@ -135,7 +135,7 @@ public class FloorPlan {
 			}
 		}
 		//get tile g3 in order to make it the the charging station
-		Tile chargingStation = roomLayout.get("g3");
+		Tile chargingStation = roomLayout.get("d3");
 		chargingStation.setChargingStation(true);
 		System.out.println("Floor plan has successfully been built");
 	}

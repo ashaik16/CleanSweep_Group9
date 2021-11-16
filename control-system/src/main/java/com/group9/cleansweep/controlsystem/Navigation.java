@@ -48,11 +48,17 @@ public class Navigation {
 			if (isObstacleTop(target)) {
 				return traverseRight(target);
 			}
+			else if (target.getTopNext().isVisited()){
+				System.out.println("top tile already visited.  Trying Right.");
+				return traverseRight(target);
+			}
 			else {
-				System.out.println("Top direction is clear.  Proceeding.");
-				target.setVisited(true);
-				System.out.println("Traversed up from tile " + target.getId() + " to tile " + target.getTopNext().getId() + ".");
-				return target.getTopNext();
+				{
+					System.out.println("Top direction is clear.  Proceeding.");
+					target.setVisited(true);
+					System.out.println("Traversed up from tile " + target.getId() + " to tile " + target.getTopNext().getId() + ".");
+					return target.getTopNext();
+				}
 			}
 		}
 		catch(NullPointerException e) {
@@ -64,6 +70,10 @@ public class Navigation {
 	private Tile traverseRight(Tile target) {
 		try {
 			if (isObstacleRight(target)) {
+				return traverseBottom(target);
+			}
+			else if (target.getRightNext().isVisited()){
+				System.out.println("Right tile already visited.  Trying bottom.");
 				return traverseBottom(target);
 			}
 			else {
@@ -84,6 +94,10 @@ public class Navigation {
 			if (isObstacleBottom(target)) {
 				return traverseLeft(target);
 			}
+			else if (target.getBottomNext().isVisited()){
+				System.out.println("Bottom tile already visited.  Trying Left.");
+				return traverseLeft(target);
+			}
 			else {
 				System.out.println("Bottom direction is clear.  Proceeding.");
 				target.setVisited(true);
@@ -101,6 +115,10 @@ public class Navigation {
 		try {
 			if (isObstacleLeft(target)) {
 				System.out.println("Clean Sweep encountered an obstacle on all sides.  Stopping.");
+				return target;
+			}
+			else if (target.getLeftNext().isVisited()){
+				System.out.println("Left tile is already visited.  Returning to Charging station since all surrounding tiles are visited.");
 				return target;
 			}
 			else {
@@ -129,7 +147,7 @@ public class Navigation {
 	private Boolean isObstacleLeft(Tile currentPos) {
 //		currentPos.getLeftNext().setIsObstacle(ObstacleSimulator.getInstance().getRandomObstacle());
 		if(currentPos.getLeftNext().getObstacle()) {
-			System.out.println("Detected tile " + currentPos.getLeftNext().getId() + " as obstacle to the left. Uh oh...");
+			System.out.println("Detected tile " + currentPos.getLeftNext().getId() + " as obstacle to the left.");
 			return true;
 		} else return false;
 	}

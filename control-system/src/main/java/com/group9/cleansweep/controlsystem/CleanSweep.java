@@ -50,10 +50,10 @@ public class CleanSweep {
 			if(nextTile == null){
 				previousTile = firstTile;
 			}
-			else if (nextTile.getId() == previousTile.getId()) {
-				System.out.println("We ran into a null tile.  Stopping shortly...");
-				keepWorking = false;
-			}
+//			else if (nextTile.getId() == previousTile.getId()) {
+//				System.out.println("We ran into a wall.  Stopping shortly...");
+//				keepWorking = false;
+//			}
 			else{
 				System.out.println("Previous tile: " + previousTile.getId() + " Next Tile: " + nextTile.getId());
 				list[i] = previousTile.getId();
@@ -62,12 +62,14 @@ public class CleanSweep {
 				for (int g = 0; g < list.length ;g++) {
 					if (nextTile.getId() == list[g]) {
 						System.out.println("We've encountered multiple isVisited tiles in a row.  Returning to Power Station at the end of this cycle.");
-						keepWorking = false;
+						previousTile = firstTile;
+						break;
 					}
 				}
 			}
 
 			if(isMinimumPowerCapacityReached){
+				System.out.println("Power is low.  Returning to charging station.");
 				break;
 			}
 			nextTile = navigation.traverse(previousTile);
